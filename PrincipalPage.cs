@@ -9,35 +9,38 @@ namespace Safe
 {
     public class MainPage : ContentPage
     {
-   
+        public object RowDefinitions { get; private set; }
+
         public MainPage()
         {
             var top = new Button
             {
-                Text = "top",
-                BackgroundColor = new Color(127, 0, 0)
+                Text = "Top",
+                BackgroundColor = new Color(100, 0, 0)
             };
-
             var middle = new Button
             {
-                Text = "middle",
-                BackgroundColor = new Color(0, 127, 0)
+                Text = "Middle",
+                BackgroundColor = new Color(0, 100, 0)
             };
 
             var bottom = new Button
             {
                 Text = "Bottom",
-                BackgroundColor = new Color(0, 0, 127)
+                BackgroundColor = new Color(0,0,100)
             };
-
+            
             addEventHandlers(top, middle, bottom);
 
-            var layout = new Grid
-            {
-                
-                Padding = 40,
-                Children = { top, middle, bottom }
-            };
+            var layout = new Grid();
+
+            layout.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
+            layout.RowDefinitions.Add(new RowDefinition { Height = new GridLength(3, GridUnitType.Star) });
+
+            layout.Children.Add(top, 0, 0);
+            layout.Children.Add(middle, 0, 1);
+            layout.Children.Add(bottom, 0, 2);
+
 
             Content = layout;
             
