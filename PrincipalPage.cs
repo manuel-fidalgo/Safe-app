@@ -15,27 +15,33 @@ namespace Safe
         {
             var top = new Button
             {
-                Text = "Top",
-                BackgroundColor = new Color(100, 0, 0)
+                Image = "first.png",
+                Text = "Danger",
+                BackgroundColor = new Color(255, 0, 0),
             };
+
             var middle = new Button
             {
-                Text = "Middle",
-                BackgroundColor = new Color(0, 100, 0)
+                Text = "Calibrate",
+                BackgroundColor = new Color(0, 255, 0),
+                Image = "second.png"
             };
 
             var bottom = new Button
             {
-                Text = "Bottom",
-                BackgroundColor = new Color(0,0,100)
+                Text = "Settings",
+                BackgroundColor = new Color(0, 0, 255),
+                Image = "third.png"
             };
             
             addEventHandlers(top, middle, bottom);
 
             var layout = new Grid();
 
-            layout.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
-            layout.RowDefinitions.Add(new RowDefinition { Height = new GridLength(3, GridUnitType.Star) });
+            layout.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength('*', GridUnitType.Star) });
+            layout.RowDefinitions.Add(new RowDefinition { Height = new GridLength('*', GridUnitType.Star) });
+            layout.RowDefinitions.Add(new RowDefinition { Height = new GridLength('*', GridUnitType.Star) });
+            layout.RowDefinitions.Add(new RowDefinition { Height = new GridLength('*', GridUnitType.Star) });
 
             layout.Children.Add(top, 0, 0);
             layout.Children.Add(middle, 0, 1);
