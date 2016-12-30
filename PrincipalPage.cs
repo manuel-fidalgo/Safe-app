@@ -17,20 +17,20 @@ namespace Safe
             {
                 Image = "first.png",
                 Text = "Danger",
-                BackgroundColor = new Color(255, 0, 0),
+                BackgroundColor = Color.FromRgb(255, 104, 104), //new Color(r,g,b) is not valid
             };
 
             var middle = new Button
             {
                 Text = "Calibrate",
-                BackgroundColor = new Color(0, 255, 0),
+                BackgroundColor = Color.FromRgb(161, 255, 145),
                 Image = "second.png"
             };
 
             var bottom = new Button
             {
                 Text = "Settings",
-                BackgroundColor = new Color(0, 0, 255),
+                BackgroundColor = Color.FromRgb(186, 212, 255),
                 Image = "third.png"
             };
             
