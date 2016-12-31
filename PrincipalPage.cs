@@ -33,7 +33,7 @@ namespace Safe
                 Text = AppResources.danger_activity,
                 Image = "first.png", 
                 TextColor = Color.Black,
-                BackgroundColor = Color.FromRgb(255, 104, 104), //new Color(r,g,b) is not valid
+                BackgroundColor = Color.FromRgb(51,181,229), //new Color(r,g,b) is not valid
             };
 
             var middle = new Button
@@ -41,7 +41,7 @@ namespace Safe
                 Text = AppResources.accelerometer,
                 Image = "second.png",
                 TextColor = Color.Black,
-                BackgroundColor = Color.FromRgb(161, 255, 145),
+                BackgroundColor = Color.FromRgb(51, 181, 229),
             };
 
             var bottom = new Button
@@ -49,7 +49,7 @@ namespace Safe
                 Text = AppResources.settings,
                 Image = "third.png",
                 TextColor = Color.Black,
-                BackgroundColor = Color.FromRgb(186, 212, 255),
+                BackgroundColor = Color.FromRgb(51, 181, 229),
             };
             
             addEventHandlers(top, middle, bottom);

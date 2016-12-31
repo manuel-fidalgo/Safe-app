@@ -39,6 +39,7 @@
     <Compile Include="AccelerometerPage.cs" />
     <Compile Include="App.cs" />
     <Compile Include="DangerActivity.cs" />
+    <Compile Include="LanguageCell.cs" />
     <Compile Include="PageManager.cs" />
     <Compile Include="PrincipalPage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

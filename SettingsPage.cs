@@ -7,6 +7,8 @@ namespace Safe
         public SettingsPage()
         {
            
+            //Hardware config
+
             var gps_sw_cell = new SwitchCell
             {
                 Text = "GPS detection"
@@ -15,22 +17,29 @@ namespace Safe
             {
                 Text = "Accelerometer detection"
             };
+            var vibration_cell = new SwitchCell
+            {
+                Text = "Vibration"
+            };
 
-            var gpsaccelerometer_section = new TableSection("GPS and accelerometer")
+            var gpsaccelerometer_section = new TableSection("Hardware Config")
             {
                 gps_sw_cell,
-                accelerometer_cell
+                accelerometer_cell,
+                vibration_cell
             };
             
             //Password configuration
 
             var password_cell = new SwitchCell
             {
-                Text = "Password"
+                Text = "Use a Security code",
+                On = false
             };
             var password_text = new EntryCell
             {
-                Text = "Password"
+                Label = "Security code",
+                Text = "****"
             };
             var password_setcion = new TableSection("Password config")
             {
@@ -42,16 +51,18 @@ namespace Safe
 
             var contact_message = new EntryCell
             {
-                Text = "Conctac Message"
+                Label = "Conctact Message:  "
             };
             var contact_number = new EntryCell
-            {
-                Text = "Contact Number"
+            {   
+                Label = "Contact number:  ",
             };
             var emergency_number = new EntryCell
             {
-                Text = "Emergency number"
+                Label = "Emergency number  ",
+                LabelColor = Color.FromRgb(255,100,100),
             };
+
             var personal_section = new TableSection("Personal info")
             {
                 contact_message,
@@ -59,14 +70,41 @@ namespace Safe
                 emergency_number
             };
 
-            Content = new TableView
+            //Language cell
+
+            var language_cell = new LanguageCell();
+
+            //Save button
+
+            var save_button = new Button
             {
-                Root = new TableRoot
+                Text = "Save",
+                TextColor = Color.Aqua
+            };
+            
+            //Setings tableview
+
+             var settings_table = new TableView
+             {
+                 Root = new TableRoot
+                 {
+                     gpsaccelerometer_section,
+                     password_setcion,
+                     personal_section,
+                 } 
+             };
+         
+            Content = new ScrollView
+            {
+                Content = new StackLayout
                 {
-                    gpsaccelerometer_section,
-                    password_setcion,
-                    personal_section,
-                }, 
+                    Padding = 10,
+                    Children =
+                    {
+                        settings_table,
+                        save_button
+                    }
+                }
             };
         }
     }
