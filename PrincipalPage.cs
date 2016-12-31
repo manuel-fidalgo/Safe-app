@@ -9,29 +9,35 @@ namespace Safe
 {
     public class MainPage : ContentPage
     {
-        public object RowDefinitions { get; private set; }
+        //public object RowDefinitions { get; private set; }
+        AccelerometerPage accelerometer_page;
+
 
         public MainPage()
         {
+            
             var top = new Button
             {
                 Image = "first.png",
                 Text = "Danger",
+                TextColor = Color.Black,
                 BackgroundColor = Color.FromRgb(255, 104, 104), //new Color(r,g,b) is not valid
             };
 
             var middle = new Button
             {
                 Text = "Calibrate",
+                Image = "second.png",
+                TextColor = Color.Black,
                 BackgroundColor = Color.FromRgb(161, 255, 145),
-                Image = "second.png"
             };
 
             var bottom = new Button
             {
                 Text = "Settings",
+                Image = "third.png",
+                TextColor = Color.Black,
                 BackgroundColor = Color.FromRgb(186, 212, 255),
-                Image = "third.png"
             };
             
             addEventHandlers(top, middle, bottom);
@@ -49,7 +55,13 @@ namespace Safe
 
 
             Content = layout;
-            
+
+            accelerometer_page = new AccelerometerPage
+            {
+                mainpage = this,
+                IsVisible = false
+            };
+
         }
 
         private void addEventHandlers(Button top, Button middle, Button bottom)
@@ -67,7 +79,8 @@ namespace Safe
 
         private void MiddleClicked(object sender, EventArgs e)
         {
-            DisplayAlert("Info Message", "middle", "Ok");
+            this.IsVisible = false;
+            accelerometer_page.IsVisible = true;
         }
 
         private void BottomClicked(object sender, EventArgs e)

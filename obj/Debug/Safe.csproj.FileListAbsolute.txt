@@ -8,5 +8,7 @@ C:\Users\Manuel\Documents\Visual Studio 2015\Projects\Safe\Safe\Safe\bin\Debug\X
 C:\Users\Manuel\Documents\Visual Studio 2015\Projects\Safe\Safe\Safe\obj\Debug\Safe.csprojResolveAssemblyReference.cache
 C:\Users\Manuel\Documents\Visual Studio 2015\Projects\Safe\Safe\Safe\obj\Debug\Safe.dll
 C:\Users\Manuel\Documents\Visual Studio 2015\Projects\Safe\Safe\Safe\obj\Debug\Safe.pdb
+C:\Users\Manuel\Documents\Visual Studio 2015\Projects\Safe\Safe\Safe\bin\Debug\Mono.Android.dll
+C:\Users\Manuel\Documents\Visual Studio 2015\Projects\Safe\Safe\Safe\bin\Debug\Mono.Android.xml
 C:\Users\Manuel\Documents\Visual Studio 2015\Projects\Safe\Safe\Safe\obj\Debug\Safe.dll.mdb
 C:\Users\Manuel\Documents\Visual Studio 2015\Projects\Safe\Safe\Safe\bin\Debug\Safe.dll.mdb
