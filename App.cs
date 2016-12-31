@@ -1,18 +1,18 @@
-﻿using System;
+﻿using Android.OS;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
 using Xamarin.Forms;
 
-namespace Safe
+namespace Safe 
 {
     public class App : Application
     {
         public App()
         {
             // The root page of your application
-            MainPage = new MainPage();
+            MainPage = PageManager.Init();
         }
 
         protected override void OnStart()
@@ -29,5 +29,6 @@ namespace Safe
         {
             // Handle when your app resumes
         }
+
     }
 }

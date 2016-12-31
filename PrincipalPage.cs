@@ -11,11 +11,14 @@ namespace Safe
     {
         //public object RowDefinitions { get; private set; }
         AccelerometerPage accelerometer_page;
-
+        NavigationPage nav_page;
 
         public MainPage()
         {
-            
+            nav_page = new NavigationPage(this);
+            NavigationPage.SetHasNavigationBar(this, false);
+
+
             var top = new Button
             {
                 Image = "first.png",
@@ -56,11 +59,7 @@ namespace Safe
 
             Content = layout;
 
-            accelerometer_page = new AccelerometerPage
-            {
-                mainpage = this,
-                IsVisible = false
-            };
+            accelerometer_page = new AccelerometerPage();
 
         }
 
@@ -79,8 +78,7 @@ namespace Safe
 
         private void MiddleClicked(object sender, EventArgs e)
         {
-            this.IsVisible = false;
-            accelerometer_page.IsVisible = true;
+           Navigation.PushAsync(accelerometer_page);
         }
 
         private void BottomClicked(object sender, EventArgs e)
