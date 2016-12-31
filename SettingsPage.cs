@@ -11,22 +11,18 @@ namespace Safe
     {
         public SettingsPage()
         {
+            var gps_status = new Button
+            {
+
+            };
+
             Content = new ScrollView
             {
                 Content = new StackLayout
                 {
                     Children =
                     {
-                        new Button(),
-                        new Button(),
-                        new Button(),
-                        new Button(),
-                        new Button(),
-                        new Button(),
-                        new Button(),
-                        new Button(),
-                        new Button(),
-                        new Button(),
+                        
                     }
                 }
             };

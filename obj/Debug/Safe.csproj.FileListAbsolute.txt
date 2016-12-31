@@ -16,5 +16,15 @@ C:\Users\Manuel\Documents\Visual Studio 2015\Projects\Safe\Safe\Safe\bin\Debug\S
 C:\Users\Manuel\Documents\Visual Studio 2015\Projects\Safe\Safe\Safe\bin\Debug\System.Core.dll
 C:\Users\Manuel\Documents\Visual Studio 2015\Projects\Safe\Safe\Safe\bin\Debug\Mono.Dynamic.Interpreter.dll
 C:\Users\Manuel\Documents\Visual Studio 2015\Projects\Safe\Safe\Safe\bin\Debug\Xamarin.iOS.xml
+C:\Users\Manuel\Documents\Visual Studio 2015\Projects\Safe\Safe\Safe\obj\Debug\Safe.resource.en.resources
+C:\Users\Manuel\Documents\Visual Studio 2015\Projects\Safe\Safe\Safe\obj\Debug\Safe.resource.it.resources
+C:\Users\Manuel\Documents\Visual Studio 2015\Projects\Safe\Safe\Safe\obj\Debug\Safe.resources.es.resources
+C:\Users\Manuel\Documents\Visual Studio 2015\Projects\Safe\Safe\Safe\obj\Debug\Safe.csproj.GenerateResource.Cache
+C:\Users\Manuel\Documents\Visual Studio 2015\Projects\Safe\Safe\Safe\bin\Debug\en\Safe.resources.dll
+C:\Users\Manuel\Documents\Visual Studio 2015\Projects\Safe\Safe\Safe\bin\Debug\it\Safe.resources.dll
+C:\Users\Manuel\Documents\Visual Studio 2015\Projects\Safe\Safe\Safe\bin\Debug\es\Safe.resources.dll
+C:\Users\Manuel\Documents\Visual Studio 2015\Projects\Safe\Safe\Safe\obj\Debug\en\Safe.resources.dll
+C:\Users\Manuel\Documents\Visual Studio 2015\Projects\Safe\Safe\Safe\obj\Debug\it\Safe.resources.dll
+C:\Users\Manuel\Documents\Visual Studio 2015\Projects\Safe\Safe\Safe\obj\Debug\es\Safe.resources.dll
 C:\Users\Manuel\Documents\Visual Studio 2015\Projects\Safe\Safe\Safe\obj\Debug\Safe.dll.mdb
 C:\Users\Manuel\Documents\Visual Studio 2015\Projects\Safe\Safe\Safe\bin\Debug\Safe.dll.mdb

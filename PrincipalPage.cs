@@ -30,15 +30,15 @@ namespace Safe
 
             var top = new Button
             {
-                Image = "first.png",
-                Text = "Danger",
+                Text = "",
+                Image = "first.png", 
                 TextColor = Color.Black,
                 BackgroundColor = Color.FromRgb(255, 104, 104), //new Color(r,g,b) is not valid
             };
 
             var middle = new Button
             {
-                Text = "Calibrate",
+                Text = "Giroscopio",
                 Image = "second.png",
                 TextColor = Color.Black,
                 BackgroundColor = Color.FromRgb(161, 255, 145),
@@ -46,7 +46,7 @@ namespace Safe
 
             var bottom = new Button
             {
-                Text = "Settings",
+                Text = "Ajustes",
                 Image = "third.png",
                 TextColor = Color.Black,
                 BackgroundColor = Color.FromRgb(186, 212, 255),
@@ -64,7 +64,6 @@ namespace Safe
             layout.Children.Add(top, 0, 0);
             layout.Children.Add(middle, 0, 1);
             layout.Children.Add(bottom, 0, 2);
-
 
             Content = layout;
         }
