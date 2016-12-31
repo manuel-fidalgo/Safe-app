@@ -52,10 +52,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>AppResources.en.resx</DependentUpon>
     </Compile>
-    <Compile Include="AppResources.es.Designer.cs">
+    <Compile Include="AppResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>AppResources.es.resx</DependentUpon>
+      <DependentUpon>AppResources.resx</DependentUpon>
     </Compile>
     <Compile Include="SettingsPage.cs" />
   </ItemGroup>
@@ -87,14 +87,17 @@
     <EmbeddedResource Include="AppResources.it.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>AppResources.it.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>Safe</CustomToolNamespace>
     </EmbeddedResource>
     <EmbeddedResource Include="AppResources.en.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>AppResources.en.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>Safe</CustomToolNamespace>
     </EmbeddedResource>
-    <EmbeddedResource Include="AppResources.es.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>AppResources.es.Designer.cs</LastGenOutput>
+    <EmbeddedResource Include="AppResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>AppResources.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>Safe</CustomToolNamespace>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />

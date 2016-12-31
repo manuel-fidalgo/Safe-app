@@ -88,7 +88,6 @@ namespace Safe
 
         private void BottomClicked(object sender, EventArgs e)
         {
-            //DisplayAlert("Info Message", "bottom", "Ok");
             Navigation.PushAsync(settings_page);
         }
     }
