@@ -28,7 +28,7 @@ namespace Safe
                 Padding = 20,
                 Children =
                 {
-
+                    acceler.getLabel(),
                     exit_button,
 
                 }

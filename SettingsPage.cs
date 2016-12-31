@@ -9,6 +9,27 @@ namespace Safe
 {
     class SettingsPage : ContentPage
     {
-
+        public SettingsPage()
+        {
+            Content = new ScrollView
+            {
+                Content = new StackLayout
+                {
+                    Children =
+                    {
+                        new Button(),
+                        new Button(),
+                        new Button(),
+                        new Button(),
+                        new Button(),
+                        new Button(),
+                        new Button(),
+                        new Button(),
+                        new Button(),
+                        new Button(),
+                    }
+                }
+            };
+        }
     }
 }

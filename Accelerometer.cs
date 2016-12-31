@@ -1,28 +1,26 @@
-﻿using Android.Hardware;
+﻿using System;
+using Android.Hardware;
+using Android.OS;
+using Android.Widget;
 using Xamarin.Forms;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Android.Runtime;
-using CoreMotion;
 
 namespace Safe
 {
     /**This class will wrap the accelerometeter process, implements the ISensorEventListener interface*/
-    class Accelerometer  
+    class Accelerometer
     {
         Label label;
-
         public Accelerometer()
         {
-            label = new Label();
-            label.Text = "Null";
-        }
+            label = new Label
+            {
+                Text = "Not implemented yet"
+            };
+        } 
         public Label getLabel()
         {
             return label;
         }
     }
 }
+

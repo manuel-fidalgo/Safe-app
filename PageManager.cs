@@ -7,6 +7,7 @@ using Xamarin.Forms;
 
 namespace Safe
 {
+    //wraps the main page into a navigation page
     public class PageManager
     {
         public static NavigationPage Init()

@@ -9,12 +9,21 @@ namespace Safe
 {
     public class MainPage : ContentPage
     {
-        //public object RowDefinitions { get; private set; }
+        //Childrens pages
         AccelerometerPage accelerometer_page;
+        DangerActivityPage danger_page;
+        SettingsPage settings_page;
+
+        //Navigation page
         NavigationPage nav_page;
 
         public MainPage()
         {
+            accelerometer_page = new AccelerometerPage();
+            danger_page = new DangerActivityPage();
+            settings_page = new SettingsPage();
+
+
             nav_page = new NavigationPage(this);
             NavigationPage.SetHasNavigationBar(this, false);
 
@@ -58,9 +67,6 @@ namespace Safe
 
 
             Content = layout;
-
-            accelerometer_page = new AccelerometerPage();
-
         }
 
         private void addEventHandlers(Button top, Button middle, Button bottom)
@@ -70,10 +76,10 @@ namespace Safe
             bottom.Clicked += BottomClicked;
         }
         
-        //Clicked events
+        //Clicked events, push the needed page to the first position.
         private void TopClicked(object sender, EventArgs e)
         {
-            DisplayAlert("Info Message", "top", "Ok");
+            Navigation.PushAsync(danger_page);
         }
 
         private void MiddleClicked(object sender, EventArgs e)
@@ -83,7 +89,8 @@ namespace Safe
 
         private void BottomClicked(object sender, EventArgs e)
         {
-            DisplayAlert("Info Message", "bottom", "Ok");
+            //DisplayAlert("Info Message", "bottom", "Ok");
+            Navigation.PushAsync(settings_page);
         }
     }
 }
