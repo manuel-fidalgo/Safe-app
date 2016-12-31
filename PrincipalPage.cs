@@ -1,14 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Resources;
 using Xamarin.Forms;
+
 
 namespace Safe
 {
     public class MainPage : ContentPage
     {
+
         //Childrens pages
         AccelerometerPage accelerometer_page;
         DangerActivityPage danger_page;
@@ -19,6 +18,7 @@ namespace Safe
 
         public MainPage()
         {
+            
             accelerometer_page = new AccelerometerPage();
             danger_page = new DangerActivityPage();
             settings_page = new SettingsPage();
@@ -30,7 +30,7 @@ namespace Safe
 
             var top = new Button
             {
-                Text = "",
+                Text = AppResources.danger_activity,
                 Image = "first.png", 
                 TextColor = Color.Black,
                 BackgroundColor = Color.FromRgb(255, 104, 104), //new Color(r,g,b) is not valid
@@ -38,7 +38,7 @@ namespace Safe
 
             var middle = new Button
             {
-                Text = "Giroscopio",
+                Text = AppResources.accelerometer,
                 Image = "second.png",
                 TextColor = Color.Black,
                 BackgroundColor = Color.FromRgb(161, 255, 145),
@@ -46,7 +46,7 @@ namespace Safe
 
             var bottom = new Button
             {
-                Text = "Ajustes",
+                Text = AppResources.settings,
                 Image = "third.png",
                 TextColor = Color.Black,
                 BackgroundColor = Color.FromRgb(186, 212, 255),

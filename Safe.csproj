@@ -42,20 +42,20 @@
     <Compile Include="PageManager.cs" />
     <Compile Include="PrincipalPage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="resource.en.Designer.cs">
+    <Compile Include="AppResources.it.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>resource.en.resx</DependentUpon>
+      <DependentUpon>AppResources.it.resx</DependentUpon>
     </Compile>
-    <Compile Include="resource.it.Designer.cs">
+    <Compile Include="AppResources.en.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>resource.it.resx</DependentUpon>
+      <DependentUpon>AppResources.en.resx</DependentUpon>
     </Compile>
-    <Compile Include="resources.es.Designer.cs">
+    <Compile Include="AppResources.es.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>resources.es.resx</DependentUpon>
+      <DependentUpon>AppResources.es.resx</DependentUpon>
     </Compile>
     <Compile Include="SettingsPage.cs" />
   </ItemGroup>
@@ -84,17 +84,17 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="resource.en.resx">
+    <EmbeddedResource Include="AppResources.it.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>resource.en.Designer.cs</LastGenOutput>
+      <LastGenOutput>AppResources.it.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="resource.it.resx">
+    <EmbeddedResource Include="AppResources.en.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>resource.it.Designer.cs</LastGenOutput>
+      <LastGenOutput>AppResources.en.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="resources.es.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>resources.es.Designer.cs</LastGenOutput>
+    <EmbeddedResource Include="AppResources.es.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AppResources.es.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
