@@ -11,6 +11,7 @@ namespace Safe
     class AccelerometerPage : ContentPage
     {
         Accelerometer acceler;
+        Gps gps;
        
         public AccelerometerPage()
         {
