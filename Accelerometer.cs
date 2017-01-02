@@ -10,17 +10,12 @@ namespace Safe
     class Accelerometer
     {
         Label label;
+
         public Accelerometer()
         {
-            label = new Label
-            {
-                Text = "Not implemented yet"
-            };
+            
         } 
-        public Label getLabel()
-        {
-            return label;
-        }
+        
     }
 }
 

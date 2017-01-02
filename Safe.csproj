@@ -40,6 +40,7 @@
     <Compile Include="App.cs" />
     <Compile Include="DangerActivity.cs" />
     <Compile Include="LanguageCell.cs" />
+    <Compile Include="LanguagesList.cs" />
     <Compile Include="PageManager.cs" />
     <Compile Include="PrincipalPage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -59,6 +60,7 @@
       <DependentUpon>AppResources.resx</DependentUpon>
     </Compile>
     <Compile Include="SettingsPage.cs" />
+    <Compile Include="SettingsWrap.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Mono.Android">

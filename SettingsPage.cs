@@ -1,30 +1,38 @@
-﻿using Xamarin.Forms;
+﻿using System;
+using Xamarin.Forms;
 
 namespace Safe
 {
     class SettingsPage : ContentPage
     {
+
+        LanguagesList lg_lst;
+
         public SettingsPage()
         {
-           
-            //Hardware config
 
-            var gps_sw_cell = new SwitchCell
+            lg_lst = new LanguagesList();
+
+            //Hardware config
+            
+            var gps_cell = new SwitchCell
             {
                 Text = "GPS detection"
             };
+
             var accelerometer_cell = new SwitchCell
             {
                 Text = "Accelerometer detection"
             };
+
             var vibration_cell = new SwitchCell
             {
                 Text = "Vibration"
             };
 
-            var gpsaccelerometer_section = new TableSection("Hardware Config")
+            var hardware_section = new TableSection("Hardware Config")
             {
-                gps_sw_cell,
+                gps_cell,
                 accelerometer_cell,
                 vibration_cell
             };
@@ -36,11 +44,13 @@ namespace Safe
                 Text = "Use a Security code",
                 On = false
             };
+
             var password_text = new EntryCell
             {
                 Label = "Security code",
                 Text = "****"
             };
+
             var password_setcion = new TableSection("Password config")
             {
                 password_cell,
@@ -53,10 +63,12 @@ namespace Safe
             {
                 Label = "Conctact Message:  "
             };
+
             var contact_number = new EntryCell
             {   
                 Label = "Contact number:  ",
             };
+
             var emergency_number = new EntryCell
             {
                 Label = "Emergency number  ",
@@ -72,8 +84,13 @@ namespace Safe
 
             //Language cell
 
-            var language_cell = new LanguageCell();
+            var languagecell = new LanguageCell(this);
 
+            var language_section = new TableSection("Language")
+            {
+                languagecell
+            };
+            
             //Save button
 
             var save_button = new Button
@@ -88,9 +105,10 @@ namespace Safe
              {
                  Root = new TableRoot
                  {
-                     gpsaccelerometer_section,
+                     hardware_section,
                      password_setcion,
                      personal_section,
+                     language_section
                  } 
              };
          
@@ -106,6 +124,11 @@ namespace Safe
                     }
                 }
             };
+        }
+
+        public void showLanguajesList()
+        {
+            Navigation.PushAsync(lg_lst);
         }
     }
 }

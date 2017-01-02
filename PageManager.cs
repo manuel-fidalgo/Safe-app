@@ -7,12 +7,18 @@ using Xamarin.Forms;
 
 namespace Safe
 {
-    //wraps the main page into a navigation page
+    //Wraps the main page into a navigation page
     public class PageManager
     {
         public static NavigationPage Init()
         {
             NavigationPage nav = new NavigationPage(new MainPage());
+            return nav;
+        }
+
+        public static NavigationPage InitLanguages()
+        {
+            NavigationPage nav = new NavigationPage(new LanguagesList());
             return nav;
         }
     }
