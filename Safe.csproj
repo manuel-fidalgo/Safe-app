@@ -86,6 +86,7 @@
   <ItemGroup>
     <None Include="GettingStarted.Xamarin" />
     <None Include="packages.config" />
+    <None Include="settings.config" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="AppResources.it.resx">
