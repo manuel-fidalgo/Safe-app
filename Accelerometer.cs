@@ -9,13 +9,10 @@ namespace Safe
     /**This class will wrap the accelerometeter process, implements the ISensorEventListener interface*/
     class Accelerometer
     {
-        Label label;
-
         public Accelerometer()
         {
             
         } 
-        
     }
 }
 

@@ -24,5 +24,11 @@ C:\Users\Manuel\Documents\Visual Studio 2015\Projects\Safe\Safe\Safe\obj\Debug\e
 C:\Users\Manuel\Documents\Visual Studio 2015\Projects\Safe\Safe\Safe\obj\Debug\Safe.dll
 C:\Users\Manuel\Documents\Visual Studio 2015\Projects\Safe\Safe\Safe\obj\Debug\Safe.pdb
 C:\Users\Manuel\Documents\Visual Studio 2015\Projects\Safe\Safe\Safe\obj\Debug\Safe.AppResources.resources
+C:\Users\Manuel\Documents\Visual Studio 2015\Projects\Safe\Safe\Safe\bin\Debug\SkiaSharp.dll
+C:\Users\Manuel\Documents\Visual Studio 2015\Projects\Safe\Safe\Safe\bin\Debug\SkiaSharp.Views.Forms.dll
+C:\Users\Manuel\Documents\Visual Studio 2015\Projects\Safe\Safe\Safe\bin\Debug\SkiaSharp.xml
+C:\Users\Manuel\Documents\Visual Studio 2015\Projects\Safe\Safe\Safe\bin\Debug\Xamarin.Forms.Core.pdb
+C:\Users\Manuel\Documents\Visual Studio 2015\Projects\Safe\Safe\Safe\bin\Debug\Xamarin.Forms.Platform.pdb
+C:\Users\Manuel\Documents\Visual Studio 2015\Projects\Safe\Safe\Safe\bin\Debug\Xamarin.Forms.Xaml.pdb
 C:\Users\Manuel\Documents\Visual Studio 2015\Projects\Safe\Safe\Safe\obj\Debug\Safe.dll.mdb
 C:\Users\Manuel\Documents\Visual Studio 2015\Projects\Safe\Safe\Safe\bin\Debug\Safe.dll.mdb

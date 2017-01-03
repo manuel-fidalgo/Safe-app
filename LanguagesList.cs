@@ -10,11 +10,24 @@ namespace Safe
     class LanguagesList : ContentPage
     {
 
+        //Language Codes  (ISO 639-1 codes)
+
+        public static readonly String SPANISH = "es";
+        public static readonly String ENGLISH = "en";
+        public static readonly String ITALIAN = "it";
+        public static readonly String GERMANY = "gr";
+        public static readonly String FRENCH = "fr";
+
+        //XML file with the settings
+
+       
         public LanguagesList()
         {
+
+
             var english_buttom = new Button
             {
-                Text = "Spanish",
+                Text = "English",
             };
             english_buttom.Clicked += English_buttom_Clicked;
 
@@ -30,11 +43,11 @@ namespace Safe
             };
             italian_buttom.Clicked += Italian_buttom_Clicked;
 
-            var germany_buttom = new Button
+            var german_buttom = new Button
             {
-                Text = "Germany"
+                Text = "German"
             };
-            germany_buttom.Clicked += Germany_buttom_Clicked;
+            german_buttom.Clicked += Germany_buttom_Clicked;
 
             var french_buttom = new Button
             {
@@ -49,12 +62,18 @@ namespace Safe
                 {
                     Children =
                     {
-                        new TableView { Root = new TableRoot { new TableSection("Choose language") }},
-                        english_buttom,
-                        spanish_buttom,
-                        italian_buttom,
-                        germany_buttom,
-                        french_buttom
+                        new TableView {
+                            Root = new TableRoot {
+                                new TableSection("Choose language") {
+                                    new ViewCell {View = english_buttom},
+                                    new ViewCell {View = spanish_buttom},
+                                    new ViewCell {View = italian_buttom },
+                                    new ViewCell {View = german_buttom },
+                                    new ViewCell {View = english_buttom },
+                                    new ViewCell {View = french_buttom }
+                                }
+                            }
+                        }
                     }
                 }
             };
@@ -62,27 +81,33 @@ namespace Safe
 
         private void French_buttom_Clicked(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            changeLanguage(FRENCH);
         }
 
         private void Germany_buttom_Clicked(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            changeLanguage(GERMANY);
         }
 
         private void Italian_buttom_Clicked(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            changeLanguage(ITALIAN);
         }
 
         private void Spanish_buttom_Clicked(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            changeLanguage(SPANISH);
         }
 
         private void English_buttom_Clicked(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            changeLanguage(ENGLISH);
+        }
+
+        //Edits the XML file with the current language
+        private void changeLanguage(string len)
+        {
+            Navigation.PopAsync();
         }
     }
 }
