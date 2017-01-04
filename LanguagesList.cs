@@ -10,50 +10,61 @@ namespace Safe
     class LanguagesList : ContentPage
     {
 
-        //Language Codes  (ISO 639-1 codes)
-
-        public static readonly String SPANISH = "es";
-        public static readonly String ENGLISH = "en";
-        public static readonly String ITALIAN = "it";
-        public static readonly String GERMANY = "gr";
-        public static readonly String FRENCH = "fr";
-
         //XML file with the settings
+        public static readonly String[] LANGUAGES_CODE = new String[] {"EN","ES","IT","DE","FR"};
+        public static readonly String[] LANGUAGES = new String[] {"  English", "  Spanish","  Italian","  Germany","  French"};
 
        
         public LanguagesList()
         {
 
 
-            var english_buttom = new Button
+           
+            var english_cell = new ViewCell()
             {
-                Text = "English",
+                View = new Label()
+                {
+                    Text = LANGUAGES[0]
+                }
             };
-            english_buttom.Clicked += English_buttom_Clicked;
+            english_cell.Tapped += English_cell_Tapped;
 
-            var spanish_buttom = new Button
+            var spanish_cell = new ViewCell()
             {
-                Text = "Spanish"
+                View = new Label()
+                {
+                    Text = LANGUAGES[1]
+                }
             };
-            spanish_buttom.Clicked += Spanish_buttom_Clicked;
+            spanish_cell.Tapped += Spanish_cell_Tapped;
 
-            var italian_buttom = new Button
+          
+            var italian_cell = new ViewCell
             {
-                Text = "Italian"
+                View = new Label()
+                {
+                    Text = LANGUAGES[2]
+                }
             };
-            italian_buttom.Clicked += Italian_buttom_Clicked;
+            italian_cell.Tapped += Italian_cell_Tapped;
 
-            var german_buttom = new Button
+            var german_cell = new ViewCell
             {
-                Text = "German"
+                View = new Label()
+                {
+                    Text = LANGUAGES[3]
+                }
             };
-            german_buttom.Clicked += Germany_buttom_Clicked;
+            german_cell.Tapped += German_cell_Tapped;
 
-            var french_buttom = new Button
+            var french_cell = new ViewCell
             {
-                Text = "French"
+                View = new Label()
+                {
+                    Text = LANGUAGES[4]
+                }
             };
-            french_buttom.Clicked += French_buttom_Clicked;
+            french_cell.Tapped += French_cell_Tapped;
 
 
             Content = new ScrollView
@@ -65,12 +76,11 @@ namespace Safe
                         new TableView {
                             Root = new TableRoot {
                                 new TableSection("Choose language") {
-                                    new ViewCell {View = english_buttom},
-                                    new ViewCell {View = spanish_buttom},
-                                    new ViewCell {View = italian_buttom },
-                                    new ViewCell {View = german_buttom },
-                                    new ViewCell {View = english_buttom },
-                                    new ViewCell {View = french_buttom }
+                                    english_cell,
+                                    spanish_cell,
+                                    italian_cell,
+                                    german_cell,
+                                    french_cell,
                                 }
                             }
                         }
@@ -79,29 +89,26 @@ namespace Safe
             };
         }
 
-        private void French_buttom_Clicked(object sender, EventArgs e)
+        //Tapped events for each cell
+        private void English_cell_Tapped(object sender, EventArgs e)
         {
-            changeLanguage(FRENCH);
+            changeLanguage(LANGUAGES_CODE[0]);
         }
-
-        private void Germany_buttom_Clicked(object sender, EventArgs e)
+        private void Spanish_cell_Tapped(object sender, EventArgs e)
         {
-            changeLanguage(GERMANY);
+            changeLanguage(LANGUAGES_CODE[1]);
         }
-
-        private void Italian_buttom_Clicked(object sender, EventArgs e)
+        private void Italian_cell_Tapped(object sender, EventArgs e)
         {
-            changeLanguage(ITALIAN);
+            changeLanguage(LANGUAGES_CODE[2]);
         }
-
-        private void Spanish_buttom_Clicked(object sender, EventArgs e)
+        private void German_cell_Tapped(object sender, EventArgs e)
         {
-            changeLanguage(SPANISH);
+            changeLanguage(LANGUAGES_CODE[3]);
         }
-
-        private void English_buttom_Clicked(object sender, EventArgs e)
+        private void French_cell_Tapped(object sender, EventArgs e)
         {
-            changeLanguage(ENGLISH);
+            changeLanguage(LANGUAGES_CODE[4]);
         }
 
         //Edits the XML file with the current language

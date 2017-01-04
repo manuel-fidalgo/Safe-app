@@ -24,14 +24,6 @@ namespace Safe
             var canvas_view = new SKCanvasView();
             canvas_view.PaintSurface += Canvas_view_PaintSurface;
 
-            /*
-            var bitmap = new SKBitmap();
-            var painter = new SKPaint();
-            var canvas = new SKCanvas(bitmap);
-            canvas.Clear(Xamarin.Forms.Color.Black.ToSKColor());
-            painter.Color = Xamarin.Forms.Color.Red.ToSKColor();
-            canvas.DrawLine(0,0,100,100,painter);
-            */
             Content = new ContentView {
                     Content = canvas_view
             };
