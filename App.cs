@@ -29,6 +29,5 @@ namespace Safe
         {
             // Handle when your app resumes
         }
-
     }
 }

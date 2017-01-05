@@ -16,19 +16,31 @@ namespace Safe
         Accelerometer acceler;
         Gps gps;
 
+        Label gps_label;
+        Label accelerometer_label;
+
         public AccelerometerPage()
         {
-            acceler = new Accelerometer();
-            gps = new Gps();
+            acceler = new Accelerometer(accelerometer_label);
+            gps = new Gps(gps_label);
 
-            var canvas_view = new SKCanvasView();
-            canvas_view.PaintSurface += Canvas_view_PaintSurface;
+            gps_label = new Label();
+            accelerometer_label = new Label();
 
-            Content = new ContentView {
-                    Content = canvas_view
+            Content = new StackLayout {
+                    Children = {
+                        gps_label,
+                        accelerometer_label
+                    }
+                    
             };
+            /*
+            var canvas_view = new SKCanvasView();
+            canvas_view.PaintSurface += Canvas_view_PaintSurface; //Event called in every "Repaint" call.
+            */
         }
-
+        //Not able to use the skiasharp library
+        /*
         private void Canvas_view_PaintSurface(object sender, SKPaintSurfaceEventArgs e)
         {
            int surfaceWidth = e.Info.Width;
@@ -47,5 +59,6 @@ namespace Safe
                canvas.DrawOval(r1, paint);
            }
         }
+        */
     }
 }
