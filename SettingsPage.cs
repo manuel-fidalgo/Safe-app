@@ -7,51 +7,59 @@ namespace Safe
     {
 
         LanguagesList lg_lst;
+        SwitchCell gps_cell, accelerometer_cell, vibration_cell, password_cell;
+        EntryCell password_text, contact_message, contact_number, emergency_number;
+        TableSection hardware_section, password_setcion, personal_section, language_section;
+        LanguageCell languagecell;
 
         public SettingsPage()
         {
 
+            SettingsWrap.loadSettings();
             lg_lst = new LanguagesList();
 
             //Hardware config
-            
-            var gps_cell = new SwitchCell
+
+            gps_cell = new SwitchCell
             {
                 Text = "GPS detection"
             };
+            
 
-            var accelerometer_cell = new SwitchCell
+            accelerometer_cell = new SwitchCell
             {
                 Text = "Accelerometer detection"
             };
 
-            var vibration_cell = new SwitchCell
+            vibration_cell = new SwitchCell
             {
                 Text = "Vibration"
             };
 
-            var hardware_section = new TableSection("Hardware Config")
+            hardware_section = new TableSection("Hardware Config")
             {
                 gps_cell,
                 accelerometer_cell,
-                vibration_cell
+                vibration_cell,
             };
-            
+
             //Password configuration
 
-            var password_cell = new SwitchCell
+            password_cell = new SwitchCell
             {
                 Text = "Use a Security code",
                 On = false
             };
+            password_cell.OnChanged += Password_cell_OnChanged;
 
-            var password_text = new EntryCell
+            password_text = new EntryCell
             {
                 Label = "Security code",
-                Text = "****"
+                Placeholder = "****",
+                IsEnabled = false
             };
 
-            var password_setcion = new TableSection("Password config")
+            password_setcion = new TableSection("Password config")
             {
                 password_cell,
                 password_text
@@ -59,23 +67,24 @@ namespace Safe
 
             //Personal data configuration
 
-            var contact_message = new EntryCell
+            contact_message = new EntryCell
             {
-                Label = "Conctact Message:  "
+                Label = "Conctact Message:  ",
             };
 
-            var contact_number = new EntryCell
-            {   
+            contact_number = new EntryCell
+            {
                 Label = "Contact number:  ",
             };
 
-            var emergency_number = new EntryCell
+            emergency_number = new EntryCell
             {
                 Label = "Emergency number  ",
-                LabelColor = Color.FromRgb(255,100,100),
+                LabelColor = Color.FromRgb(255, 100, 100),
+                Placeholder = "112"
             };
 
-            var personal_section = new TableSection("Personal info")
+            personal_section = new TableSection("Personal info")
             {
                 contact_message,
                 contact_number,
@@ -84,13 +93,13 @@ namespace Safe
 
             //Language cell
 
-            var languagecell = new LanguageCell(this);
+            languagecell = new LanguageCell(this);
 
-            var language_section = new TableSection("Language")
+            language_section = new TableSection("Language")
             {
                 languagecell
             };
-            
+
             //Save button
 
             var save_button = new Button
@@ -98,37 +107,63 @@ namespace Safe
                 Text = "Save",
                 TextColor = Color.Aqua
             };
-            
-            //Setings tableview
+            save_button.Clicked += Save_button_Clicked;
 
-             var settings_table = new TableView
-             {
-                 Root = new TableRoot
+            var save_cell = new ViewCell
+            {
+                View = save_button
+            };
+
+            var save_section = new TableSection("Save settings")
+            {
+                save_cell
+            };
+
+
+            var settings_table = new TableView
+            {
+                Root = new TableRoot
                  {
-                     hardware_section,
-                     password_setcion,
-                     personal_section,
-                     language_section
-                 } 
-             };
-         
+                    hardware_section,
+                    password_setcion,
+                    personal_section,
+                    language_section,
+                    save_section
+                    
+                 },
+                Intent = TableIntent.Settings
+            };
+
             Content = new ScrollView
             {
-                Content = new StackLayout
-                {
-                    Padding = 10,
-                    Children =
-                    {
-                        settings_table,
-                        save_button
-                    }
-                }
+                Content = settings_table,
+                IsClippedToBounds = true
             };
+
+        }
+
+        private void Password_cell_OnChanged(object sender, ToggledEventArgs e)
+        {
+            if (password_cell.On)
+                password_text.IsEnabled = true;
+            else
+                password_text.IsEnabled = false;
+        }
+
+        private void Save_button_Clicked(object sender, EventArgs e)
+        {
+            saveSettings();
+            Navigation.PopAsync();
         }
 
         public void showLanguajesList()
         {
             Navigation.PushAsync(lg_lst);
+        }
+
+        public void saveSettings()
+        {
+
         }
     }
 }

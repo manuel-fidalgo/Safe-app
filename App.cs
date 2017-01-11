@@ -5,6 +5,9 @@ using System.Linq;
 using System.Text;
 using Xamarin.Forms;
 
+
+
+
 namespace Safe 
 {
     public class App : Application

@@ -1,50 +1,34 @@
-﻿using System;
-using Android.Locations;
-using Android.OS;
-using Android.Runtime;
+﻿using Plugin.Geolocator;
+using System;
+using System.Linq;
 using Xamarin.Forms;
+
+
 
 namespace Safe
 {
-    public class Gps : ILocationListener
+    public class Gps 
     {
-        Label gps_label;
-        public Gps(Label lbl)
+        public Label gps_label;
+
+        public Gps(Label label)
         {
-            gps_label = lbl;
+            gps_label = label;
+            initGps();
         }
 
-        public IntPtr Handle
+        public async void initGps()
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
-        }
+            var locator = CrossGeolocator.Current;
+            locator.DesiredAccuracy = 50;
 
-        public void Dispose()
-        {
-            throw new NotImplementedException();
-        }
+            var position = await locator.GetPositionAsync(10000);
 
-        public void OnLocationChanged(Location location)
-        {
-            gps_label.Text = string.Format("lat: [%f], len[%f]",location.Latitude,location.Latitude);
-        }
+            System.Diagnostics.Debug.WriteLine("Position Status: {0}", position.Timestamp);
+            System.Diagnostics.Debug.WriteLine("Position Latitude: {0}", position.Latitude);
+            System.Diagnostics.Debug.WriteLine("Position Longitude: {0}",position.Longitude);
+            gps_label.Text = string.Format("Latitute[{0}]\nLongitude[{1}]",position.Latitude, position.Longitude);
 
-        public void OnProviderDisabled(string provider)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void OnProviderEnabled(string provider)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void OnStatusChanged(string provider, [GeneratedEnum] Availability status, Bundle extras)
-        {
-            throw new NotImplementedException();
         }
     }
 }

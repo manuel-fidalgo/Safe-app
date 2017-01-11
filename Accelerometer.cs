@@ -1,10 +1,7 @@
 ﻿using System;
-using Android.Hardware;
-using Android.OS;
-using Android.Runtime;
-using Android.Widget;
 using Xamarin.Forms;
-using Android.Content;
+using DeviceMotion.Plugin;
+using DeviceMotion.Plugin.Abstractions;
 
 namespace Safe
 {
@@ -15,26 +12,23 @@ namespace Safe
 
         public Accelerometer(Label lbl)
         {
-         //   _sensorManager = GetSystemService();
             acceleromer_label = lbl;
-            acceleromer_label.Text = "Not implemented yet";
+            startAccelerometer();
         }
-        
-        /*
-        protected override void OnResume()
-        {
-           base.OnResume();
-           _sensorManager.RegisterListener(this,
-                                           _sensorManager.GetDefaultSensor(SensorType.Accelerometer),
-                                           SensorDelay.Ui);
-        }
-        protected override void OnPause()
-        {
-           base.OnPause();
-           _sensorManager.UnregisterListener(this);
-        }
-        */
 
+        private void startAccelerometer()
+        {
+            CrossDeviceMotion.Current.Start(MotionSensorType.Accelerometer);
+            CrossDeviceMotion.Current.SensorValueChanged += Current_SensorValueChanged;        
+        }
+
+        private void Current_SensorValueChanged(object sender, SensorValueChangedEventArgs e)
+        {
+            if (e.SensorType == MotionSensorType.Accelerometer)
+            {
+                acceleromer_label.Text = string.Format("x[{0}] y[{1}] z[{2}]", ((MotionVector)e.Value).X, ((MotionVector)e.Value).Y, ((MotionVector)e.Value).Z);
+            }
+        }
     }
 }
 
