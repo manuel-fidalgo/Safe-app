@@ -9,7 +9,7 @@ namespace Safe
     {
 
         //Childrens pages
-        HardwarePage accelerometer_page;
+        HardwarePage hardware_page;
         DangerActivityPage danger_page;
         SettingsPage settings_page;
 
@@ -19,7 +19,7 @@ namespace Safe
         public MainPage()
         {
             
-            accelerometer_page = new HardwarePage();
+            hardware_page = new HardwarePage();
             danger_page = new DangerActivityPage();
             settings_page = new SettingsPage();
 
@@ -27,30 +27,20 @@ namespace Safe
             nav_page = new NavigationPage(this);
             NavigationPage.SetHasNavigationBar(this, false);
 
-
             var top = new Button
             {
                 Text = AppResources.danger_activity,
-                Image = "first.png", 
+                Image = "first.png",
                 TextColor = Color.Black,
-                BackgroundColor = Color.FromRgb(51,181,229), //new Color(r,g,b) is not valid
+                BackgroundColor = Color.FromRgb(255,255,255), //new Color(r,g,b) is not valid
             };
-
-            //////////////////////////////////////////////////////////////////////////////////
-            if (Device.OS == TargetPlatform.iOS)
-                top.Text = "Iphone";
-            else if(Device.OS == TargetPlatform.Android)
-                top.Text = "Android";
-            else
-                top.Text = "Other";
-            //////////////////////////////////////////////////////////////////////////////////
 
             var middle = new Button
             {
-                Text = AppResources.accelerometer,
+                Text = AppResources.hardware_page_tittle,
                 Image = "second.png",
                 TextColor = Color.Black,
-                BackgroundColor = Color.FromRgb(51, 181, 229),
+                BackgroundColor = Color.FromRgb(255, 255, 255),
             };
 
             var bottom = new Button
@@ -58,10 +48,12 @@ namespace Safe
                 Text = AppResources.settings,
                 Image = "third.png",
                 TextColor = Color.Black,
-                BackgroundColor = Color.FromRgb(51, 181, 229),
+                BackgroundColor = Color.FromRgb(255, 255, 255),
             };
-            
-            addEventHandlers(top, middle, bottom);
+
+            top.Clicked += TopTapped;
+            middle.Clicked += MiddleTapped;
+            bottom.Clicked += BottomTapped;
 
             var layout = new Grid();
 
@@ -75,31 +67,49 @@ namespace Safe
             layout.Children.Add(bottom, 0, 2);
 
             Content = layout;
-
-           
-        }
-
-        private void addEventHandlers(Button top, Button middle, Button bottom)
-        {
-            top.Clicked += TopClicked;
-            middle.Clicked += MiddleClicked;
-            bottom.Clicked += BottomClicked;
         }
         
         //Clicked events, push the needed page to the first position.
-        private void TopClicked(object sender, EventArgs e)
+        private void TopTapped(object sender, EventArgs e)
         {
             Navigation.PushAsync(danger_page);
         }
 
-        private void MiddleClicked(object sender, EventArgs e)
+        private void MiddleTapped(object sender, EventArgs e)
         {
-           Navigation.PushAsync(accelerometer_page);
+           Navigation.PushAsync(hardware_page);
         }
 
-        private void BottomClicked(object sender, EventArgs e)
+        private void BottomTapped(object sender, EventArgs e)
         {
             Navigation.PushAsync(settings_page);
         }
     }
+
+    internal class CustomButton : Button
+    {
+        Color color { get; set; }
+
+        public CustomButton(String text)
+        {
+            BackgroundColor = Color.FromRgb(10, 10, 50);
+        }
+    }
 }
+
+/*
+            var top = new CustonView(AppResources.danger_activity);
+            var top_tap = new TapGestureRecognizer();
+            top_tap.Tapped += TopTapped;
+            top.GestureRecognizers.Add(top_tap);
+
+            var middle = new CustonView(AppResources.hardware_page_tittle);
+            var middle_tap = new TapGestureRecognizer();
+            middle_tap.Tapped += MiddleTapped;
+            top.GestureRecognizers.Add(middle_tap);
+
+            var bottom = new CustonView(AppResources.settings);
+            var bottom_tap = new TapGestureRecognizer();
+            bottom_tap.Tapped += BottomTapped;
+            top.GestureRecognizers.Add(bottom_tap);
+*/

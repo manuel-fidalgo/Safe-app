@@ -117,18 +117,58 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="accelerometer" xml:space="preserve">
-    <value>Acelerometro</value>
-    <comment>null</comment>
+  <data name="accelerometer_status" xml:space="preserve">
+    <value>Accelerometer status</value>
+  </data>
+  <data name="contact_message" xml:space="preserve">
+    <value>Contact message</value>
+  </data>
+  <data name="contact_number" xml:space="preserve">
+    <value>Contact number</value>
   </data>
   <data name="danger_activity" xml:space="preserve">
-    <value>Actividad Peligrosa</value>
-    <comment>null</comment>
+    <value>Danger Activity</value>
+  </data>
+  <data name="emergency_number" xml:space="preserve">
+    <value>Emergency Number</value>
+  </data>
+  <data name="gps_status" xml:space="preserve">
+    <value>GPS status</value>
+  </data>
+  <data name="hardware_config" xml:space="preserve">
+    <value>Hardware config</value>
+  </data>
+  <data name="hardware_page_tittle" xml:space="preserve">
+    <value>Hardware</value>
+  </data>
+  <data name="language" xml:space="preserve">
+    <value>Language </value>
+  </data>
+  <data name="password_config" xml:space="preserve">
+    <value>Pasword config</value>
+  </data>
+  <data name="personal_info_config" xml:space="preserve">
+    <value>Personal Info config</value>
+  </data>
+  <data name="pin_code" xml:space="preserve">
+    <value>Pin code</value>
+  </data>
+  <data name="save" xml:space="preserve">
+    <value>SAVE</value>
+  </data>
+  <data name="save_settings" xml:space="preserve">
+    <value>Save settings</value>
   </data>
   <data name="settings" xml:space="preserve">
-    <value>Ajustes</value>
+    <value>Settings</value>
+  </data>
+  <data name="use_pin" xml:space="preserve">
+    <value>Use pin</value>
+  </data>
+  <data name="vibration_status" xml:space="preserve">
+    <value>Vibration Status</value>
   </data>
   <data name="warning" xml:space="preserve">
-    <value>Advertencia</value>
+    <value>Warning</value>
   </data>
 </root>

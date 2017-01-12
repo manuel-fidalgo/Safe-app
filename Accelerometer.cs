@@ -24,9 +24,13 @@ namespace Safe
 
         private void Current_SensorValueChanged(object sender, SensorValueChangedEventArgs e)
         {
-            if (e.SensorType == MotionSensorType.Accelerometer)
+            try
             {
-                acceleromer_label.Text = string.Format("x[{0}] y[{1}] z[{2}]", ((MotionVector)e.Value).X, ((MotionVector)e.Value).Y, ((MotionVector)e.Value).Z);
+                if (e.SensorType == MotionSensorType.Accelerometer)
+                    acceleromer_label.Text = string.Format("x[{0}]\n y[{1}]\n z[{2}]", ((MotionVector)e.Value).X, ((MotionVector)e.Value).Y, ((MotionVector)e.Value).Z);
+
+            }catch (Exception){
+                System.Diagnostics.Debug.WriteLine("Accelerometer exception");
             }
         }
     }

@@ -62,16 +62,34 @@ namespace Safe {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Acelerometro.
+        ///   Busca una cadena traducida similar a Accelerometer status.
         /// </summary>
-        internal static string accelerometer {
+        internal static string accelerometer_status {
             get {
-                return ResourceManager.GetString("accelerometer", resourceCulture);
+                return ResourceManager.GetString("accelerometer_status", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Actividad Peligrosa.
+        ///   Busca una cadena traducida similar a Contact message.
+        /// </summary>
+        internal static string contact_message {
+            get {
+                return ResourceManager.GetString("contact_message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Contact number.
+        /// </summary>
+        internal static string contact_number {
+            get {
+                return ResourceManager.GetString("contact_number", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Danger Activity.
         /// </summary>
         internal static string danger_activity {
             get {
@@ -80,7 +98,97 @@ namespace Safe {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Ajustes.
+        ///   Busca una cadena traducida similar a Emergency Number.
+        /// </summary>
+        internal static string emergency_number {
+            get {
+                return ResourceManager.GetString("emergency_number", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a GPS status.
+        /// </summary>
+        internal static string gps_status {
+            get {
+                return ResourceManager.GetString("gps_status", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Hardware config.
+        /// </summary>
+        internal static string hardware_config {
+            get {
+                return ResourceManager.GetString("hardware_config", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Hardware.
+        /// </summary>
+        internal static string hardware_page_tittle {
+            get {
+                return ResourceManager.GetString("hardware_page_tittle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Language .
+        /// </summary>
+        internal static string language {
+            get {
+                return ResourceManager.GetString("language", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Pasword config.
+        /// </summary>
+        internal static string password_config {
+            get {
+                return ResourceManager.GetString("password_config", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Personal Info config.
+        /// </summary>
+        internal static string personal_info_config {
+            get {
+                return ResourceManager.GetString("personal_info_config", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Pin code.
+        /// </summary>
+        internal static string pin_code {
+            get {
+                return ResourceManager.GetString("pin_code", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a SAVE.
+        /// </summary>
+        internal static string save {
+            get {
+                return ResourceManager.GetString("save", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Save settings.
+        /// </summary>
+        internal static string save_settings {
+            get {
+                return ResourceManager.GetString("save_settings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Settings.
         /// </summary>
         internal static string settings {
             get {
@@ -89,7 +197,25 @@ namespace Safe {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Advertencia.
+        ///   Busca una cadena traducida similar a Use pin.
+        /// </summary>
+        internal static string use_pin {
+            get {
+                return ResourceManager.GetString("use_pin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Vibration Status.
+        /// </summary>
+        internal static string vibration_status {
+            get {
+                return ResourceManager.GetString("vibration_status", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Warning.
         /// </summary>
         internal static string warning {
             get {

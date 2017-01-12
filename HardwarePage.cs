@@ -28,10 +28,6 @@ namespace Safe
                 HorizontalOptions = LayoutOptions.CenterAndExpand,
             };
             
-            var tgr = new TapGestureRecognizer();
-            tgr.Tapped += (s, e) => OnLabelClicked();
-            gps_label.GestureRecognizers.Add(tgr);
-
             accelerometer_label = new Label()
             {
                 Text = "accelerometer",
@@ -49,11 +45,6 @@ namespace Safe
                     }
                     
             };
-        }
-
-        private void OnLabelClicked()
-        {
-            gps.initGps();
         }
     }
 }
