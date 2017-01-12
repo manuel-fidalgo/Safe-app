@@ -14,6 +14,7 @@ namespace Safe
     class SettingsWrap
     {
         private static readonly string SETTINGS_PATH = "settings.xml";
+        public static readonly string DEFAULT_PASS = "****";
 
         private static Boolean gps_status;
         private static Boolean accelerometer_status;
@@ -27,36 +28,45 @@ namespace Safe
         private static String emergency_number;
 
         private static String currentLanguage;
+        private static String currentLanguage_code;
 
         private static XDocument settings_file;
 
-        public static void loadSettings()
+        //XML conexion methods
+        public static void loadSettingsfromXML()
         {
-            /*
+            
             settings_file = XDocument.Load(SETTINGS_PATH);
             IEnumerable<XElement> settings_list = settings_file.Elements();
             foreach ( var setting in settings_list)
             {
                 Debug.WriteLine(setting);
             }
-            */
+            
 
         }
+
+        public static void writeSettingsintoXML()
+        {
+
+        }
+
 
         //GPS
-        public static void change_gps_status()
+        public static void set_gps_status(Boolean b)
         {
-            gps_status = !gps_status;
+            gps_status = b;
         }
+
         public static Boolean get_gps_status()
         {
             return gps_status;
         }
 
         //Accelerometer
-        public static void change_accelerometer_status()
+        public static void set_accelerometer_status(Boolean b)
         {
-            accelerometer_status = !accelerometer_status;
+            accelerometer_status = b;
         }
         public static Boolean get_accelerometer_status()
         {
@@ -64,9 +74,9 @@ namespace Safe
         }
 
         //Vibration
-        public static void change_vibration_status()
+        public static void set_vibration_status(Boolean b)
         {
-            vibration_status = !vibration_status;
+            vibration_status = b;
         }
         public static Boolean get_vibration_status()
         {
@@ -74,9 +84,9 @@ namespace Safe
         }
 
         //Security code
-        public static void change_seccode_status()
+        public static void set_seccode_status(Boolean b)
         {
-            security_code_status = !security_code_status;
+            security_code_status = b;
         }
         public static Boolean get_seccode_status()
         {

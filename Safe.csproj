@@ -121,6 +121,7 @@
     <None Include="packages.config" />
     <EmbeddedResource Include="settings.xml">
       <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

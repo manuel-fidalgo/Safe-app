@@ -11,11 +11,14 @@ namespace Safe
         EntryCell password_text, contact_message, contact_number, emergency_number;
         TableSection hardware_section, password_setcion, personal_section, language_section;
         LanguageCell languagecell;
+        public static string current_language;
+        public static string current_language_code;
+
 
         public SettingsPage()
         {
 
-            SettingsWrap.loadSettings();
+           
             lg_lst = new LanguagesList();
 
             //Hardware config
@@ -164,7 +167,22 @@ namespace Safe
 
         public void saveSettings()
         {
+            SettingsWrap.set_gps_status(gps_cell.On);
+            SettingsWrap.set_accelerometer_status(accelerometer_cell.On);
+            SettingsWrap.set_vibration_status(vibration_cell.On);
 
+            SettingsWrap.set_seccode_status(password_cell.On);
+
+            if (password_cell.On)
+                SettingsWrap.set_securityCode(password_text.Text);
+            else
+                SettingsWrap.set_securityCode(SettingsWrap.DEFAULT_PASS);
+
+            SettingsWrap.setContactMessage(contact_message.Text);
+            SettingsWrap.setContactNumber(contact_number.Text);
+            SettingsWrap.setEmergencyNumber(emergency_number.Text);
+
+            SettingsWrap.writeSettingsintoXML();
         }
     }
 }

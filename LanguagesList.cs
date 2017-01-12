@@ -92,28 +92,31 @@ namespace Safe
         //Tapped events for each cell
         private void English_cell_Tapped(object sender, EventArgs e)
         {
-            changeLanguage(LANGUAGES_CODE[0]);
+            changeLanguage(0);
         }
         private void Spanish_cell_Tapped(object sender, EventArgs e)
         {
-            changeLanguage(LANGUAGES_CODE[1]);
+            changeLanguage(1);
         }
         private void Italian_cell_Tapped(object sender, EventArgs e)
         {
-            changeLanguage(LANGUAGES_CODE[2]);
+            changeLanguage(2);
         }
         private void German_cell_Tapped(object sender, EventArgs e)
         {
-            changeLanguage(LANGUAGES_CODE[3]);
+            changeLanguage(3);
         }
         private void French_cell_Tapped(object sender, EventArgs e)
         {
-            changeLanguage(LANGUAGES_CODE[4]);
+            changeLanguage(4);
         }
 
         //Edits the XML file with the current language
-        private void changeLanguage(string len)
+        private void changeLanguage(int index)
         {
+            SettingsPage.current_language = LANGUAGES[index];
+            SettingsPage.current_language_code = LANGUAGES_CODE[index];
+
             Navigation.PopAsync();
         }
     }
