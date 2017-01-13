@@ -127,7 +127,7 @@
     <value>Contact number</value>
   </data>
   <data name="danger_activity" xml:space="preserve">
-    <value>Danger Activity</value>
+    <value>Activity</value>
   </data>
   <data name="emergency_number" xml:space="preserve">
     <value>Emergency Number</value>

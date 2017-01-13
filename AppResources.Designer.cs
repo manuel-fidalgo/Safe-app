@@ -89,7 +89,7 @@ namespace Safe {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Danger Activity.
+        ///   Busca una cadena traducida similar a Activity.
         /// </summary>
         internal static string danger_activity {
             get {
