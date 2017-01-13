@@ -9,7 +9,6 @@ namespace Safe
     class Accelerometer 
     {
         Label acceleromer_label;
-        public int counter;
 
         static bool ON = true;
 

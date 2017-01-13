@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Resources;
 using Xamarin.Forms;
+using SkiaSharp;
+using SkiaSharp.Views;
+using SkiaSharp.Views.Forms;
 
 
 namespace Safe
@@ -29,41 +32,7 @@ namespace Safe
             nav_page = new NavigationPage(this);
             NavigationPage.SetHasNavigationBar(this, false);
 
-            /*
-            
-            //DONE WITH BUTTONS
-
-            var top = new Button
-            {
-                Text = AppResources.danger_activity,
-                Image = "first.png",
-                TextColor = Color.Black,
-                BackgroundColor = Color.FromRgb(255,255,255), //new Color(r,g,b) is not valid
-            };
-
-            var middle = new Button
-            {
-                Text = AppResources.hardware_page_tittle,
-                Image = "second.png",
-                TextColor = Color.Black,
-                BackgroundColor = Color.FromRgb(255, 255, 255),
-            };
-
-            var bottom = new Button
-            {
-                Text = AppResources.settings,
-                Image = "third.png",
-                TextColor = Color.Black,
-                BackgroundColor = Color.FromRgb(255, 255, 255),
-            };
-
-            top.Clicked += TopTapped;
-            middle.Clicked += MiddleTapped;
-            bottom.Clicked += BottomTapped;
-            */
-
-
-            //DONE WITH CUSTONVIEWS
+            //CUSTONVIEWS
 
             top_view = new CustomView(AppResources.danger_activity);
             var top_tap = new TapGestureRecognizer();
@@ -115,18 +84,35 @@ namespace Safe
 
     internal class CustomView : ContentView
     {
-        Color color { get; set; }
-        Label txt;
-        BoxView line;
+        String view_text;
 
         public CustomView(String text)
         {
-            txt = new Label
+            view_text = text;
+            SKCanvasView canvas_view = new SKCanvasView();
+            canvas_view.PaintSurface += PaintSurface;
+            Content = canvas_view;
+
+        }
+
+        public void PaintSurface(object sendes, SKPaintSurfaceEventArgs e)
+        {
+            SKCanvas myCanvas = e.Surface.Canvas;
+            int surfaceWidth = e.Info.Width;
+            int surfaceHeight = e.Info.Height;
+
+            myCanvas.Clear();
+            using (var paint = new SKPaint())
             {
-                Text = text,
-                TextColor = Color.Lime
-            };
-            Content = txt;
+                paint.IsAntialias = true;
+                paint.Color = new SKColor(0xe5efff);
+                paint.StrokeCap = SKStrokeCap.Round;
+                myCanvas.DrawRect(new SKRect(0,0,surfaceWidth,surfaceHeight),paint);
+                paint.Color = new SKColor(0x282cff);  //0x282cff
+                myCanvas.DrawLine(surfaceWidth/8,surfaceHeight/6, (surfaceWidth / 8)*7, surfaceHeight / 5, paint);
+                paint.Color = new SKColor(0xffffff);
+                myCanvas.DrawText(view_text,surfaceHeight/12, surfaceHeight / 12, paint);
+            }
         }
     }
 }

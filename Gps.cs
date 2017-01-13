@@ -11,7 +11,6 @@ namespace Safe
     public class Gps 
     {
         public Label gps_label;
-        Task task;
         readonly int TASK_DELAY = 500; //Time for each gps update
         public static readonly int ACCURACY = 1; //Acuracy for the gps (meters)
         static bool ON = true;
