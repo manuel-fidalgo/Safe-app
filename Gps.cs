@@ -11,9 +11,7 @@ namespace Safe
     class Gps 
     {
         labelrender gps_label;
-        readonly int TASK_DELAY = 500; //Time for each gps update
         public static readonly int ACCURACY = 1; //Acuracy for the gps (meters)
-        static bool ON = true;
         static Gps gps_singleton;
 
         IGeolocator locator;
@@ -26,6 +24,7 @@ namespace Safe
             gps_singleton = this;
         }
 
+        //Singleton pattern for create
         public static Gps getGps()
         {
             return gps_singleton;

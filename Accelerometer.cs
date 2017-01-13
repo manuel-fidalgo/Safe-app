@@ -24,12 +24,14 @@ namespace Safe
             counter = 0;
         }
 
+        //Set up
         private void startAccelerometer()
         {
             CrossDeviceMotion.Current.Start(MotionSensorType.Accelerometer);
             CrossDeviceMotion.Current.SensorValueChanged += Current_SensorValueChanged;        
         }
 
+        //Event handler for sensor value changed
         private void Current_SensorValueChanged(object sender, SensorValueChangedEventArgs e)
         {
                 try

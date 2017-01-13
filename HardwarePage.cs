@@ -23,23 +23,29 @@ namespace Safe
 
         List<accelerometerValue> accelerometer_data;
 
+        static readonly int UPDATE_DELAY = 100;
+
 
         public HardwarePage()
         {
+            //wraps for both sensors
             gps_label = new labelrender();
             accelerometer_label = new labelrender();
+            //Default messages
             gps_label.Text = "Not avaliable";
             accelerometer_label.Text = "Not avaliable";
-
+            //List for store the accelerometer data
             accelerometer_data = new List<accelerometerValue>();
 
             acceler = new Accelerometer(accelerometer_label,accelerometer_data);
             gps = new Gps(gps_label);
 
+            //SKiasharp view
             view = new SKCanvasView();
             view.PaintSurface += View_PaintSurface;
             Content = view;
 
+            //synchronyzed task
             Task.Factory.StartNew(
                 () => this.update(),
                 CancellationToken.None,
@@ -48,13 +54,14 @@ namespace Safe
                 );
         }
 
+        //Update Loop
         private async Task update()
         {
             while (true)
             {
                 view.InvalidateSurface(); //Repaint method
                 Gps.getGps().getGpsLocation();
-                await Task.Delay(100);
+                await Task.Delay(UPDATE_DELAY); //Delay between updates
             }
         }
         
@@ -103,7 +110,7 @@ namespace Safe
         public String Text;
         public labelrender(){}
     }
-    //Wraps the x y x values from the accelerometer
+    //Wraps the x y z values from the accelerometer
     class accelerometerValue
     {
         public double x, y, z;
