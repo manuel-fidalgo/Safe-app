@@ -5,23 +5,34 @@ using System.Threading.Tasks;
 using System.Linq;
 using Xamarin.Forms;
 using Plugin.Geolocator.Abstractions;
+using System.Collections.Generic;
 
 namespace Safe
 {
     class Gps 
     {
-        labelrender gps_label;
+        
         public static readonly int ACCURACY = 1; //Acuracy for the gps (meters)
         static Gps gps_singleton;
 
+        List<VectorValue> gps_data;
+        int buffer_size;
+        int buffer_counter;
+
         IGeolocator locator;
 
-        public Gps(labelrender label)
+        
+
+        public Gps(List<VectorValue> buff, int buff_size)
         {
-            gps_label = label;
+            
             locator = CrossGeolocator.Current;
             locator.DesiredAccuracy = ACCURACY;
             gps_singleton = this;
+
+            gps_data = buff;
+            buffer_size = buff_size;
+            buffer_counter = 0;
         }
 
         //Singleton pattern for create
@@ -30,17 +41,24 @@ namespace Safe
             return gps_singleton;
         }
         
-        //Changes the render label each time this method is called
+        //Add the last location to the buffer
         public async void getGpsLocation()
         {
-            
             try
             {
                 var position = await locator.GetPositionAsync(10000);
-                gps_label.Text = string.Format("Lat[{0}] Lon[{1}]", position.Latitude, position.Longitude);
+
+                if(buffer_counter == buffer_size)
+                {
+                    gps_data.RemoveAt(0);
+                    buffer_counter--;
+                }
+                gps_data.Add(new VectorValue(position.Latitude,position.Longitude,position.Altitude));
+                buffer_counter++;
+                
             }
-            catch(Exception e) {
-                gps_label.Text = string.Format("Fail");
+            catch (Exception){
+                gps_data.Add(new VectorValue(0,0,0));
             }
         }
     }

@@ -7,51 +7,49 @@ using System.Collections.Generic;
 namespace Safe
 {
     /**This class will wrap the accelerometeter process, implements the ISensorEventListener interface*/
-    class Accelerometer 
+    class Accelerometer
     {
-        labelrender acceleromer_label;
-        List<accelerometerValue> accelerometer_data;
-        static readonly int MAX_VALUES = 500;
+        
+        List<VectorValue> accelerometer_data;
+        int buffer_counter;
+        int buffer_size;
 
-        static bool ON = true;
-        int counter;
 
-        public Accelerometer(labelrender lbl, List<accelerometerValue> data)
+        public Accelerometer(List<VectorValue> data, int buff)
         {
-            acceleromer_label = lbl;
+            buffer_size = buff;
             accelerometer_data = data;
-            if (ON) startAccelerometer();
-            counter = 0;
+            startAccelerometer();
+            buffer_counter = 0;
         }
 
         //Set up
         private void startAccelerometer()
         {
             CrossDeviceMotion.Current.Start(MotionSensorType.Accelerometer);
-            CrossDeviceMotion.Current.SensorValueChanged += Current_SensorValueChanged;        
+            CrossDeviceMotion.Current.SensorValueChanged += Current_SensorValueChanged;
         }
 
         //Event handler for sensor value changed
         private void Current_SensorValueChanged(object sender, SensorValueChangedEventArgs e)
         {
-                try
+            try
+            {
+                if (e.SensorType == MotionSensorType.Accelerometer)
                 {
-                    if (e.SensorType == MotionSensorType.Accelerometer)
+                    if (buffer_counter == buffer_size)
                     {
-                        acceleromer_label.Text = string.Format("x[{0:N3}] y[{1:N3}] z[{2:N3}]", ((MotionVector)e.Value).X, ((MotionVector)e.Value).Y, ((MotionVector)e.Value).Z);
-                        if (counter ==  MAX_VALUES)
-                        {
-                            accelerometer_data.RemoveAt(0);
-                            counter--;
-                        }
-                        accelerometer_data.Add(new accelerometerValue(((MotionVector)e.Value).X, ((MotionVector)e.Value).Y, ((MotionVector)e.Value).Z));
-                        counter++;
+                        accelerometer_data.RemoveAt(0);
+                        buffer_counter--;
                     }
+                    accelerometer_data.Add(new VectorValue(((MotionVector)e.Value).X, ((MotionVector)e.Value).Y, ((MotionVector)e.Value).Z));
+                    buffer_counter++;
                 }
-                catch (Exception)
-                {
-                    System.Diagnostics.Debug.WriteLine("Accelerometer exception");
-                }
+            }
+            catch (Exception)
+            {
+
+            }
         }
     }
 }

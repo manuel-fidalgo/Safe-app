@@ -5,7 +5,7 @@
   <vibration_status>true</vibration_status>
   <scuritycode_status>false</scuritycode_status>
   <security_code> "****" </security_code>
-  <contact_message>"Blablabla message"</contact_message>
-  <contact_number>"+34 657206567"</contact_number>
+  <contact_message>"message"</contact_message>
+  <contact_number>"+34 675359893"</contact_number>
   <emergency_number>112</emergency_number>
 </settings>
