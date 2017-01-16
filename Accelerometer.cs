@@ -1,7 +1,6 @@
-﻿using System;
-using Xamarin.Forms;
-using DeviceMotion.Plugin;
+﻿using DeviceMotion.Plugin;
 using DeviceMotion.Plugin.Abstractions;
+using System;
 using System.Collections.Generic;
 
 namespace Safe

@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Drawing;
-using Xamarin.Forms;
-using SkiaSharp;
+﻿using SkiaSharp;
 using SkiaSharp.Views.Forms;
+using System;
+using System.Collections.Generic;
 using System.Threading;
+using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace Safe
 {
@@ -18,42 +15,46 @@ namespace Safe
 
         SKCanvasView view;
 
+        DataReader data_reader;
+
         List<VectorValue> accelerometer_data;
         List<VectorValue> gps_data;
 
         static readonly int DATA_BUFFER_SIZE = 300;
 
-        static readonly int UPDATE_DELAY = 100;
+        static readonly int UPDATE_DELAY = 50; //In ms
         static int paint_counter = 0;
 
-        enum PORTION
-        {
-            ONE = 1, TWO = 2, THREE = 3, FOUR = 4, FIVE = 5, SIX = 6, SEVEN = 7, EIGHT = 8
-        }
 
         public HardwarePage()
         {
 
+
             //List for store the accelerometer data
             accelerometer_data = new List<VectorValue>();
             gps_data = new List<VectorValue>();
-
+            
             //Sensors
             acceler = new Accelerometer(accelerometer_data, DATA_BUFFER_SIZE);
-            gps = new Gps(gps_data, DATA_BUFFER_SIZE);
+            gps = new Gps(gps_data, DATA_BUFFER_SIZE,UPDATE_DELAY);
 
             //SKiasharp view
             view = new SKCanvasView();
             view.PaintSurface += View_PaintSurface;
             Content = view;
+    
+            //datareader
+            data_reader = new DataReader(accelerometer_data, gps_data);
+            data_reader.startReadings();
 
             //synchronyzed task
             Task.Factory.StartNew(
-                () => this.update(),
+                () => update(),
                 CancellationToken.None,
                 TaskCreationOptions.None,
                 TaskScheduler.FromCurrentSynchronizationContext()
                 );
+
         }
 
         //Update Loop
@@ -62,7 +63,7 @@ namespace Safe
             while (true)
             {
                 view.InvalidateSurface(); //Repaint method
-                Gps.getGps().getGpsLocation();
+                gps.getGpsLocation();
                 await Task.Delay(UPDATE_DELAY); //Delay between updates
             }
         }
@@ -76,7 +77,7 @@ namespace Safe
             SKCanvas canvas = e.Surface.Canvas;
             int surfaceWidth = e.Info.Width;
             int surfaceHeight = e.Info.Height;
-            H_DIV = 16; W_DIV = 8;
+            H_DIV = 16; W_DIV = 8; //height and width divisions
 
             w_unity = surfaceWidth / W_DIV;
             h_unity = surfaceHeight / H_DIV;
@@ -104,7 +105,8 @@ namespace Safe
                 if (gps_data.Count >= 1)
                 {
                     glast = gps_data[gps_data.Count - 1];
-                    canvas.DrawText(string.Format("Lat[{0:N4}],lon[{1:N4}]", glast.x, glast.y), 2 * w_unity, 4 * h_unity, paint); //Paint the values of the last element in the buffer
+                    canvas.DrawText(string.Format("Lat:[{0:N4}],Lon:[{1:N4}]", glast.x, glast.y), 2 * w_unity, 4 * h_unity, paint); //Paint the values of the last element in the buffer
+                    canvas.DrawText(string.Format("Speed:[{0:N4}](Km/h)",gps.calculateSpeed()), 2 * w_unity, 5 * h_unity, paint);
                 }
                 else
                 {   //If the buffer it's still empty
@@ -154,7 +156,7 @@ namespace Safe
                         canvas.DrawRect(new SKRect(2 * w_unity, middle_garph - (x * h_unity), 3 * w_unity, middle_garph), paint); //X red
                     }
                     else
-                    {   //In this case x will have a negative value, h+h_unity also, so if we want to add the variation we have to use abs()
+                    {   //In this case x will have a negative value, h+h_unity too, so we have to use abs()
                         canvas.DrawRect(new SKRect(2 * w_unity, middle_garph, 3 * w_unity, middle_garph + (Math.Abs(x) * h_unity)), paint); //X red
                     }
 
@@ -176,21 +178,24 @@ namespace Safe
                     else
                     {
                         canvas.DrawRect(new SKRect(4 * w_unity, middle_garph, 5 * w_unity, middle_garph + (Math.Abs(z) * h_unity)), paint); //Z Blue
-                    }
+                    }   
                 }
-
             }
-
         }
-
     }
     //Wraps the x y z values from the accelerometer
     class VectorValue
     {
         public double x, y, z;
+        public DateTimeOffset stamp;
         public VectorValue(double _x, double _y, double _z)
         {
             x = _x; y = _y; z = _z;
+        }
+
+        public VectorValue(double _x, double _y, DateTimeOffset _z)
+        {
+            x = _x; y = _y; stamp = _z;
         }
         public override string ToString()
         {

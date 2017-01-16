@@ -19,12 +19,14 @@ namespace Safe
 
         CustomView top_view, middle_view, bottom_view;
 
+
         public MainPage()
         {
             
             hardware_page = new HardwarePage();
             danger_page = new DangerActivityPage();
             settings_page = new SettingsPage();
+            
 
 
             nav_page = new NavigationPage(this);
@@ -60,8 +62,9 @@ namespace Safe
             layout.Padding = 0;
 
             Content = layout;
-        }
 
+           
+        }
 
         //Clicked events, push the needed page to the first position.
         private void TopTapped(object sender, EventArgs e)
