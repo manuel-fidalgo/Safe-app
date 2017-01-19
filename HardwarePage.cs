@@ -20,7 +20,7 @@ namespace Safe
         List<VectorValue> accelerometer_data;
         List<VectorValue> gps_data;
 
-        static readonly int DATA_BUFFER_SIZE = 300;
+        static readonly int DATA_BUFFER_SIZE = 50;
 
         static readonly int UPDATE_DELAY = 50; //In ms
         static int paint_counter = 0;
