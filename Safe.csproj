@@ -39,7 +39,6 @@
     <Compile Include="DataReader.cs" />
     <Compile Include="HardwarePage.cs" />
     <Compile Include="App.cs" />
-    <Compile Include="DangerActivity.cs" />
     <Compile Include="Gps.cs" />
     <Compile Include="LanguageCell.cs" />
     <Compile Include="LanguagesList.cs" />

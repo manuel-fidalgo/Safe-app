@@ -3,147 +3,162 @@ using Xamarin.Forms;
 using SkiaSharp;
 using SkiaSharp.Views.Forms;
 using System.Reflection;
+using System.Threading.Tasks;
+using System.Threading;
 
 namespace Safe
 {
     public class MainPage : ContentPage
     {
 
-        //Childrens pages
-        HardwarePage hardware_page;
-        DangerActivityPage danger_page;
         SettingsPage settings_page;
-
-        //Navigation page
         NavigationPage nav_page;
-
-        CustomView top_view, middle_view, bottom_view;
-
+        SKCanvasView activityview;
+        SKCanvasView settingsview;
 
         public MainPage()
         {
-            
-            hardware_page = new HardwarePage();
-            danger_page = new DangerActivityPage();
+
             settings_page = new SettingsPage();
-            
-
-
+           
             nav_page = new NavigationPage(this);
             NavigationPage.SetHasNavigationBar(this, false);
 
-            //CUSTONVIEWS
+            var tapGestureRecognizer = new TapGestureRecognizer();
+            var tapGestureRecognizer_settings = new TapGestureRecognizer();
 
-            top_view = new CustomView(AppResources.danger_activity,"first.png");
-            var top_tap = new TapGestureRecognizer();
-            top_tap.Tapped += TopTapped;
-            top_view.GestureRecognizers.Add(top_tap);
+            activityview = new SKCanvasView();
+            settingsview = new SKCanvasView();
 
-            middle_view = new CustomView(AppResources.hardware_page_tittle,"second.png");
-            var middle_tap = new TapGestureRecognizer();
-            middle_tap.Tapped += MiddleTapped;
-            middle_view.GestureRecognizers.Add(middle_tap);
+            tapGestureRecognizer.Tapped += TapGestureRecognizer_Tapped;
+            tapGestureRecognizer_settings.Tapped += TapGestureRecognizer_settings_Tapped;
+            tapGestureRecognizer.NumberOfTapsRequired = 2; 
 
-            bottom_view = new CustomView(AppResources.settings,"third.png");
-            var bottom_tap = new TapGestureRecognizer();
-            bottom_tap.Tapped += BottomTapped;
-            bottom_view.GestureRecognizers.Add(bottom_tap);
+            activityview.PaintSurface += View_PaintSurface;
+            settingsview.PaintSurface += Settingsview_PaintSurface;
 
-            var layout = new Grid();
+            activityview.GestureRecognizers.Add(tapGestureRecognizer);
+            settingsview.GestureRecognizers.Add(tapGestureRecognizer_settings);
 
-            layout.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength('*', GridUnitType.Star) });
-            layout.RowDefinitions.Add(new RowDefinition { Height = new GridLength('*', GridUnitType.Star) });
-            layout.RowDefinitions.Add(new RowDefinition { Height = new GridLength('*', GridUnitType.Star) });
-            layout.RowDefinitions.Add(new RowDefinition { Height = new GridLength('*', GridUnitType.Star) });
+            
+            int uheigth = (int) (Height / 16);
+            int height = (int) Height;
+            int width =  (int) Width;
 
-            layout.Children.Add(top_view, 0, 0);
-            layout.Children.Add(middle_view, 0, 1);
-            layout.Children.Add(bottom_view, 0, 2);
-            layout.Padding = 0;
+            AbsoluteLayout l = new AbsoluteLayout();
+            
+            AbsoluteLayout.SetLayoutBounds(activityview, new Rectangle(0, 0, 1, 0.75));
+            AbsoluteLayout.SetLayoutFlags(activityview,AbsoluteLayoutFlags.All);
+            
+            AbsoluteLayout.SetLayoutBounds(settingsview, new Rectangle(0, 1, 1, 0.25));
+            AbsoluteLayout.SetLayoutFlags(settingsview, AbsoluteLayoutFlags.All);
 
-            Content = layout;
+            l.Children.Add(activityview);
+            l.Children.Add(settingsview);
 
-           
+            Content = l;
         }
 
-        //Clicked events, push the needed page to the first position.
-        private void TopTapped(object sender, EventArgs e)
+        private void StartAnimation()
         {
-            Navigation.PushAsync(danger_page);
+            Task.Factory.StartNew(
+              () => Animation(),
+              CancellationToken.None,
+              TaskCreationOptions.None,
+              TaskScheduler.FromCurrentSynchronizationContext()
+              );
         }
 
-        private void MiddleTapped(object sender, EventArgs e)
+        private async Task Animation()
         {
-           Navigation.PushAsync(hardware_page);
+            while (true)
+            {
+                activityview.InvalidateSurface(); //Repaints the surface each second
+                await Task.Delay(1000);
+            }
         }
 
-        private void BottomTapped(object sender, EventArgs e)
+        private void TapGestureRecognizer_settings_Tapped(object sender, EventArgs e)
         {
             Navigation.PushAsync(settings_page);
         }
-    }
 
-    internal class CustomView : ContentView
-    {
-        String view_text;
-        String path;
-        static readonly int H_DIV = 12;
-        static readonly int W_DIV = 16; //Heigth And width divisions
-
-        public CustomView(String text, String resource_path)
+        private void TapGestureRecognizer_Tapped(object sender, EventArgs e)
         {
-            view_text = text;
-            path = resource_path;
-            SKCanvasView canvas_view = new SKCanvasView();
-            canvas_view.PaintSurface += PaintSurface;
-            Content = canvas_view;
-
+           //Start the animation
         }
 
-        public void PaintSurface(object sendes, SKPaintSurfaceEventArgs e)
+        //w 8 divisions, h 4 divisions
+        private void Settingsview_PaintSurface(object sender, SKPaintSurfaceEventArgs e)
         {
-            int h_unity, w_unity;
+            SKCanvas canvas = e.Surface.Canvas;
+            int width, heigth, uheigth, uwidth;
 
-            SKCanvas myCanvas = e.Surface.Canvas;
-            int surfaceWidth = e.Info.Width;
-            int surfaceHeight = e.Info.Height;
+            width = e.Info.Width;
+            heigth = e.Info.Height;
+            uheigth = heigth / 4;
+            uwidth = width / 8;
 
-            w_unity = surfaceWidth / W_DIV;
-            h_unity = surfaceHeight / H_DIV;
-
-
-            myCanvas.Clear();
-
-            using (var paint = new SKPaint())
-            {
-
-
-                paint.IsAntialias = true;
-                paint.Color = new SKColor(0xe5, 0xef, 0xff);
-                //Background
-                paint.StrokeCap = SKStrokeCap.Round;
-                myCanvas.DrawRect(new SKRect(0, 0, surfaceWidth, surfaceHeight), paint);
-                //Line
+            using (SKPaint paint = new SKPaint()) {
+                canvas.Clear(new SKColor(0xe5, 0xef, 0xff));
                 paint.Color = new SKColor(0x28, 0x2c, 0xff);  //0x282cff
-                for (int i = 0; i < 3; i++) myCanvas.DrawLine(w_unity, (h_unity * 4) + i, w_unity * 15, (h_unity * 4) + i, paint);
-
-                //Tittle
+                //Lines
+                for (int i = 0; i < 3; i++) canvas.DrawLine(uwidth, (uheigth * 3.5f) + i, uwidth * 7, (uheigth * 3.5f) + i, paint);
+                for (int i = 0; i < 3; i++) canvas.DrawLine(uwidth, (uheigth * 1.5f) + i, uwidth * 7, (uheigth * 1.5f) + i, paint);
+                //Texts
+                paint.TextSize = uheigth;
                 paint.Color = new SKColor(0x00, 0x00, 0x00);
-                paint.TextSize = 24 * 3;
-                myCanvas.DrawText(view_text, w_unity * 2, h_unity * 3, paint);
+                canvas.DrawText("Settings", uwidth, uheigth * 3, paint);
+                paint.TextSize = (int)(0.7 * uheigth);
+                canvas.DrawText("Gps... Accelerometer...", uwidth, uheigth * 1, paint);
+                displayLayout(canvas, paint, uheigth, uwidth);
+            }
 
-                //Image
-                try
-                {
-                    var assembly = typeof(CustomView).GetTypeInfo().Assembly;
-                    using (var resource = assembly.GetManifestResourceStream(path))
-                    using (var stream = new SKManagedStream(resource))
-                    using (var bitmap = SKBitmap.Decode(stream))
-                    {
-                        myCanvas.DrawBitmap(bitmap, new SKRect(2 * w_unity, 5 * h_unity, 6 * w_unity, 11 * h_unity), paint);
-                    }
-                }
-                catch (Exception ) { }
+        }
+        //w 8 divisions, h 12 divisions
+        private void View_PaintSurface(object sender, SKPaintSurfaceEventArgs e)
+        {
+            SKCanvas canvas = e.Surface.Canvas;
+            int width, heigth, uheigth, uwidth;
+
+            width = e.Info.Width;
+            heigth = e.Info.Height;
+            uheigth = heigth / 14;
+            uwidth = width / 8;
+
+
+            int middle_width = e.Info.Width / 2;
+            int middle_heigth = e.Info.Height / 2;
+            int radius = 3 * uwidth;
+
+            /*
+            double dotx = middle_width + radius * Math.Cos(current_angle); //error, the dot is always in the centre
+            double doty = middle_heigth + radius * Math.Sin(current_angle);
+            */
+
+            using (SKPaint paint = new SKPaint())
+            {
+                canvas.Clear(new SKColor(0xe5, 0xef, 0xff));
+                paint.Color = new SKColor(0x28, 0x2c, 0xff);
+                //Circle
+                canvas.DrawCircle(middle_width, 5 * uheigth , radius + 1, paint);
+                canvas.DrawCircle(middle_width, 5 * uheigth, radius + 2, paint);
+                paint.Color = new SKColor(0xe5, 0xef, 0xff);
+                canvas.DrawCircle(middle_width, 5 * uheigth, radius, paint);
+                paint.Color = new SKColor(0x00, 0x00, 0x00);
+                displayLayout(canvas, paint, uheigth, uwidth);
+            }
+        }
+
+        private void displayLayout(SKCanvas canvas, SKPaint paint, int uheigth, int uwidth )
+        {
+            for (int i = 0; i< 8; i++)
+            {
+                canvas.DrawLine(uwidth*i,0,uwidth*i,uheigth*16,paint); //Vertical
+            }
+            for (int i = 0; i < 14 ; i++)
+            {
+                canvas.DrawLine(0,uheigth*i,uwidth*8, uheigth * i, paint); //horizontal
             }
         }
     }

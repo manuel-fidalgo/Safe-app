@@ -7,16 +7,32 @@ namespace Safe
     {
 
         LanguagesList lg_lst;
+        
         SwitchCell gps_cell, accelerometer_cell, vibration_cell, password_cell;
         EntryCell password_text, contact_message, contact_number, emergency_number;
-        TableSection hardware_section, password_setcion, personal_section, language_section;
+        TableSection hardware_section, password_setcion, personal_section, language_section, test_section;
         LanguageCell languagecell;
+        ViewCell test_cell;
         public static string current_language;
         public static string current_language_code;
 
 
         public SettingsPage()
         {
+
+            test_cell = new ViewCell()
+            {
+                View = new Label
+                {
+                    Text = "test"
+                }
+            };
+            test_cell.Tapped += Test_cell_Tapped;
+
+            test_section = new TableSection
+            {
+                test_cell
+            };
 
            
             lg_lst = new LanguagesList();
@@ -128,6 +144,7 @@ namespace Safe
             {
                 Root = new TableRoot
                  {
+                    test_section,
                     hardware_section,
                     password_setcion,
                     personal_section,
@@ -144,6 +161,11 @@ namespace Safe
                 IsClippedToBounds = true
             };
 
+        }
+
+        private void Test_cell_Tapped(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new HardwarePage());
         }
 
         private void Password_cell_OnChanged(object sender, ToggledEventArgs e)

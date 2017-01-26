@@ -44,19 +44,17 @@ namespace Safe
 
         private void exploreAccelerometerValues()
         {
+            bool c = false;
             lock (accelerometer_data)
             {
-                int cero_values=0;
                 foreach (var value in accelerometer_data)
                 {
-                    if((value.x<0.5||value.x>0.5) && (value.y<0.5||value.y>0.5) && (value.z < 0.5 || value.z > 0.5))
+                    if (System.Math.Abs(value.x)>13 || System.Math.Abs(value.y)>13 || System.Math.Abs(value.z)>13)
                     {
-                        cero_values++;
+                        c = true;
+                        accelerometer_data.Remove(value);
                     }
-                }
-                if (cero_values >= 2)
-                {
-                    //pushNotification();
+                    if (c) pushNotification();
                 }
             }
         }
@@ -64,18 +62,15 @@ namespace Safe
         private async void pushNotification()
         {
             var answer = await notification_page.DisplayAlert("ALERT", "Are you okay?", "Yes", "No");
-            if (answer)
+            if (!answer)
             {
-                //Is okay
-            }else
-            {
-                sendAlertMessage();
+                sendAlertMessage();   
             }
         }
 
         private void sendAlertMessage()
         {
-            //YOKSETIO
+
         }
     }
     

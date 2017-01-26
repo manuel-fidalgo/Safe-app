@@ -54,7 +54,6 @@ namespace Safe
                 }
                 gps_data.Add(new VectorValue(position.Latitude,position.Longitude,position.Timestamp));
                 buffer_counter++;
-                
             }
             catch (Exception){
                 gps_data.Add(new VectorValue(0,0,0));
