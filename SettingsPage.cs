@@ -174,7 +174,7 @@ namespace Safe
 
         private void Map_cell_Tapped(object sender, EventArgs e)
         {
-            Navigation.PushAsync(new MapPage());
+            Navigation.PushAsync(new HardwarePage());
         }
 
         private void Test_cell_Tapped(object sender, EventArgs e)

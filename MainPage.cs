@@ -19,26 +19,28 @@ namespace Safe
         SKCanvasView settingsview;
         int angle;
         bool animation_runing;
+        SKColor CIRCLE, BALL, GRADIENT0, GRADIENT1;
 
 
         public MainPage()
         {
+            initColors();
             angle = 0;
 
             settings_page = new SettingsPage();
-           
+
             nav_page = new NavigationPage(this);
             NavigationPage.SetHasNavigationBar(this, false);
 
             var tapGestureRecognizer = new TapGestureRecognizer();
             var tapGestureRecognizer_settings = new TapGestureRecognizer();
-       
+
             activityview = new SKCanvasView();
             settingsview = new SKCanvasView();
 
             tapGestureRecognizer.Tapped += TapGestureRecognizer_Tapped;
             tapGestureRecognizer_settings.Tapped += TapGestureRecognizer_settings_Tapped;
-            tapGestureRecognizer.NumberOfTapsRequired = 2; 
+            tapGestureRecognizer.NumberOfTapsRequired = 2;
 
             activityview.PaintSurface += View_PaintSurface;
             settingsview.PaintSurface += Settingsview_PaintSurface;
@@ -46,16 +48,16 @@ namespace Safe
             activityview.GestureRecognizers.Add(tapGestureRecognizer);
             settingsview.GestureRecognizers.Add(tapGestureRecognizer_settings);
 
-            
-            int uheigth = (int) (Height / 16);
-            int height = (int) Height;
-            int width =  (int) Width;
+
+            int uheigth = (int)(Height / 16);
+            int height = (int)Height;
+            int width = (int)Width;
 
             AbsoluteLayout l = new AbsoluteLayout();
-            
+
             AbsoluteLayout.SetLayoutBounds(activityview, new Rectangle(0, 0, 1, 0.75));
-            AbsoluteLayout.SetLayoutFlags(activityview,AbsoluteLayoutFlags.All);
-            
+            AbsoluteLayout.SetLayoutFlags(activityview, AbsoluteLayoutFlags.All);
+
             AbsoluteLayout.SetLayoutBounds(settingsview, new Rectangle(0, 1, 1, 0.25));
             AbsoluteLayout.SetLayoutFlags(settingsview, AbsoluteLayoutFlags.All);
 
@@ -63,6 +65,14 @@ namespace Safe
             l.Children.Add(settingsview);
 
             Content = l;
+        }
+
+        private void initColors()
+        {
+            BALL = new SKColor(255,0,0);
+            CIRCLE = new SKColor(165, 167, 159);
+            GRADIENT0 = new SKColor(110,110,110);
+            GRADIENT1 = new SKColor(37, 40, 42);
         }
 
         private void StartAnimation()
@@ -82,7 +92,8 @@ namespace Safe
         private async Task Animation()
         {
             animation_runing = true;
-            while (animation_runing) {
+            while (animation_runing)
+            {
                 if (angle >= 360)
                 {
                     angle = 0;
@@ -93,7 +104,7 @@ namespace Safe
                     angle++; //Update the angle
                 }
                 activityview.InvalidateSurface(); //Repaints the surface each second
-                await Task.Delay(MAX_MILISECONDS/360); //One cycle for each 3 seconds
+                await Task.Delay(MAX_MILISECONDS / 360); //One cycle for each 3 seconds
             }
         }
 
@@ -121,20 +132,31 @@ namespace Safe
             uheigth = heigth / 4;
             uwidth = width / 8;
 
-            using (SKPaint paint = new SKPaint()) {
-                canvas.Clear(new SKColor(0xe5, 0xef, 0xff));
-                paint.Color = new SKColor(0x28, 0x2c, 0xff);  //0x282cff
-                //Lines
-                for (int i = 0; i < 3; i++) canvas.DrawLine(uwidth, (uheigth * 3.5f) + i, uwidth * 7, (uheigth * 3.5f) + i, paint);
-                //for (int i = 0; i < 3; i++) canvas.DrawLine(uwidth, (uheigth * 1.5f) + i, uwidth * 7, (uheigth * 1.5f) + i, paint);
+            using (SKPaint paint = new SKPaint())
+            {
+                paint.IsAntialias = true;
+
+                var shader = SKShader.CreateColor(GRADIENT1);
+                paint.Shader = shader;
+                canvas.DrawPaint(paint);
+
+                //Line
+                paint.Shader = SKShader.CreateColor(CIRCLE);
+                for (int i = 0; i < 3; i++) canvas.DrawLine(uwidth, 0 + i, uwidth * 7, 0 + i, paint);
+                //Settings box
+                paint.Shader = SKShader.CreateColor(BALL);
+                paint.Style = SKPaintStyle.Stroke;
+                paint.StrokeWidth = 5;      //Bigger wrapper                
+                canvas.DrawRoundRect(new SKRect(2 * uwidth, 1 * uheigth, 6 * uwidth,3 * uheigth), 20, 20, paint);
+                paint.StrokeWidth = 1;
                 //Texts
+                paint.Style = SKPaintStyle.Fill;
                 paint.TextSize = uheigth;
-                paint.Color = new SKColor(0x00, 0x00, 0x00);
-                canvas.DrawText("Settings", uwidth, uheigth * 3, paint);
-                paint.TextSize = (int)(0.7 * uheigth);
-                displayLayout(canvas, paint, uheigth, uwidth);
-             }
-         }
+                paint.TextAlign = SKTextAlign.Center;
+                paint.Shader = SKShader.CreateColor(CIRCLE);
+                canvas.DrawText("Settings", width / 2,(int)(uheigth * 2.5), paint);
+            }
+        }
 
         //w 8 divisions, h 12 divisions
         private void View_PaintSurface(object sender, SKPaintSurfaceEventArgs e)
@@ -152,18 +174,27 @@ namespace Safe
             int middle_heigth = 5 * uheigth;
             int radius = 3 * uwidth;
 
+            
             using (SKPaint paint = new SKPaint())
             {
-                canvas.Clear(new SKColor(0xe5, 0xef, 0xff));
-                paint.Color = new SKColor(0x8A, 0x8E, 0x8D);
+                canvas.Clear();
+                var colors = new SKColor[] { GRADIENT0,GRADIENT1 };
 
+                var shader = SKShader.CreateRadialGradient(new SKPoint(middle_width,middle_width),radius,colors,null,SKShaderTileMode.Clamp) ;
+                paint.Shader = shader;
+                canvas.DrawPaint(paint);
+            
                 //Circle
-                canvas.DrawCircle(middle_width, middle_heigth, radius + 5, paint);
-                paint.Color = new SKColor(0xe5, 0xef, 0xff);
-                canvas.DrawCircle(middle_width, middle_heigth, radius - 5, paint);
-                paint.Color = new SKColor(0x00, 0x00, 0x00);
-                displayLayout(canvas, paint, uheigth, uwidth);
 
+                paint.Shader = SKShader.CreateColor(CIRCLE);
+                paint.Style = SKPaintStyle.Stroke;
+                paint.StrokeWidth = 10;
+                canvas.DrawCircle(middle_width, middle_heigth, radius , paint);
+                paint.StrokeWidth = 1;
+
+                paint.Style = SKPaintStyle.StrokeAndFill; 
+                paint.Shader = SKShader.CreateColor(CIRCLE);
+                
                 //Text tap twice
                 paint.TextAlign = SKTextAlign.Center;
                 paint.TextSize = uheigth;
@@ -176,46 +207,32 @@ namespace Safe
                 double angle_rad = angle * 0.0174533;
                 if (animation_runing)
                 {
-                    double x, y;
-                    if (angle < 90)
-                    {
-                        x = middle_width + radius * Math.Cos(angle_rad);
-                        y = middle_heigth + radius * Math.Sin(angle_rad);
-                    }
-                    else if (angle < 180)
-                    {
-                        x = middle_width + radius * Math.Cos(angle_rad);
-                        y = middle_heigth + radius * Math.Sin(angle_rad);
-                    }
-                    else if (angle < 270)
-                    {
-                        x = middle_width + radius * Math.Cos(angle_rad);
-                        y = middle_heigth + radius * Math.Sin(angle_rad);
-                    }
-                    else
+
+                    double x = middle_width + radius * Math.Cos(angle_rad);
+                    double y = middle_heigth + radius * Math.Sin(angle_rad);
+
+                    if (angle > 270)
                     {
                         paint.TextSize = 2 * uheigth;
                         paint.TextAlign = SKTextAlign.Center;
-                        paint.Color = new SKColor(0xFF, 0x00, 0x00);
-                        canvas.DrawText("CLICK!", middle_width,(int) (uheigth * 5.5), paint);
-                        x = middle_width + radius * Math.Cos(angle_rad);
-                        y = middle_heigth + radius * Math.Sin(angle_rad);
+                        paint.Shader = SKShader.CreateColor(BALL);
+                        canvas.DrawText("CLICK!", middle_width, (int)(uheigth * 5.5), paint);
                     }
-                    paint.Color = new SKColor(0xFF, 0x00, 0x00);
+                    paint.Shader = SKShader.CreateColor(BALL);
                     canvas.DrawCircle((int)x, (int)y, 15, paint);
                 }
             }
         }
 
-        private void displayLayout(SKCanvas canvas, SKPaint paint, int uheigth, int uwidth )
+        private void displayLayout(SKCanvas canvas, SKPaint paint, int uheigth, int uwidth)
         {
-            for (int i = 0; i< 8; i++)
+            for (int i = 0; i < 8; i++)
             {
-                canvas.DrawLine(uwidth*i,0,uwidth*i,uheigth*16,paint); //Vertical
+                canvas.DrawLine(uwidth * i, 0, uwidth * i, uheigth * 16, paint); //Vertical
             }
-            for (int i = 0; i < 14 ; i++)
+            for (int i = 0; i < 14; i++)
             {
-                canvas.DrawLine(0,uheigth*i,uwidth*8, uheigth * i, paint); //horizontal
+                canvas.DrawLine(0, uheigth * i, uwidth * 8, uheigth * i, paint); //horizontal
             }
         }
     }
