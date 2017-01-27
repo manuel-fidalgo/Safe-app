@@ -83,7 +83,15 @@ namespace Safe
         {
             animation_runing = true;
             while (animation_runing) {
-                if (angle >= 360) angle = 0; else angle++; //Update the angle
+                if (angle >= 360)
+                {
+                    angle = 0;
+                    await DisplayAlert("Alert", "Are you ok?", "OK");
+                }
+                else
+                {
+                    angle++; //Update the angle
+                }
                 activityview.InvalidateSurface(); //Repaints the surface each second
                 await Task.Delay(MAX_MILISECONDS/360); //One cycle for each 3 seconds
             }
@@ -99,7 +107,7 @@ namespace Safe
             if (!animation_runing)
                 StartAnimation();
             else
-                FinishAnimation();
+                angle = 0;
         }
 
         //w 8 divisions, h 4 divisions
@@ -118,13 +126,13 @@ namespace Safe
                 paint.Color = new SKColor(0x28, 0x2c, 0xff);  //0x282cff
                 //Lines
                 for (int i = 0; i < 3; i++) canvas.DrawLine(uwidth, (uheigth * 3.5f) + i, uwidth * 7, (uheigth * 3.5f) + i, paint);
-                for (int i = 0; i < 3; i++) canvas.DrawLine(uwidth, (uheigth * 1.5f) + i, uwidth * 7, (uheigth * 1.5f) + i, paint);
+                //for (int i = 0; i < 3; i++) canvas.DrawLine(uwidth, (uheigth * 1.5f) + i, uwidth * 7, (uheigth * 1.5f) + i, paint);
                 //Texts
                 paint.TextSize = uheigth;
                 paint.Color = new SKColor(0x00, 0x00, 0x00);
                 canvas.DrawText("Settings", uwidth, uheigth * 3, paint);
                 paint.TextSize = (int)(0.7 * uheigth);
-                //displayLayout(canvas, paint, uheigth, uwidth);
+                displayLayout(canvas, paint, uheigth, uwidth);
              }
          }
 
@@ -147,20 +155,22 @@ namespace Safe
             using (SKPaint paint = new SKPaint())
             {
                 canvas.Clear(new SKColor(0xe5, 0xef, 0xff));
-                paint.Color = new SKColor(0x28, 0x2c, 0xff);
+                paint.Color = new SKColor(0x8A, 0x8E, 0x8D);
 
                 //Circle
-                canvas.DrawCircle(middle_width, middle_heigth, radius + 1, paint);
-                canvas.DrawCircle(middle_width, middle_heigth, radius + 2, paint);
+                canvas.DrawCircle(middle_width, middle_heigth, radius + 5, paint);
                 paint.Color = new SKColor(0xe5, 0xef, 0xff);
-                canvas.DrawCircle(middle_width, middle_heigth, radius, paint);
+                canvas.DrawCircle(middle_width, middle_heigth, radius - 5, paint);
                 paint.Color = new SKColor(0x00, 0x00, 0x00);
-                //displayLayout(canvas, paint, uheigth, uwidth);
+                displayLayout(canvas, paint, uheigth, uwidth);
 
                 //Text tap twice
                 paint.TextAlign = SKTextAlign.Center;
                 paint.TextSize = uheigth;
-                canvas.DrawText("Tap twice to start",middle_width,12*uheigth,paint);
+                if (animation_runing)
+                    canvas.DrawText("Tap twice", middle_width, 12 * uheigth, paint);
+                else
+                    canvas.DrawText("Tap twice to start", middle_width, 12 * uheigth, paint);
 
                 //External dot
                 double angle_rad = angle * 0.0174533;

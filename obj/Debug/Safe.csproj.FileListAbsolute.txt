@@ -49,5 +49,7 @@ C:\Users\Manuel\Documents\Visual Studio 2015\Projects\Safe\Safe\Safe\bin\Debug\P
 C:\Users\Manuel\Documents\Visual Studio 2015\Projects\Safe\Safe\Safe\bin\Debug\Plugin.Vibrate.Abstractions.pdb
 C:\Users\Manuel\Documents\Visual Studio 2015\Projects\Safe\Safe\Safe\bin\Debug\Plugin.Vibrate.Abstractions.xml
 C:\Users\Manuel\Documents\Visual Studio 2015\Projects\Safe\Safe\Safe\bin\Debug\settings.xml
+C:\Users\Manuel\Documents\Visual Studio 2015\Projects\Safe\Safe\Safe\bin\Debug\Xamarin.Forms.Maps.dll
+C:\Users\Manuel\Documents\Visual Studio 2015\Projects\Safe\Safe\Safe\bin\Debug\Xamarin.Forms.Maps.xml
 C:\Users\Manuel\Documents\Visual Studio 2015\Projects\Safe\Safe\Safe\obj\Debug\Safe.dll.mdb
 C:\Users\Manuel\Documents\Visual Studio 2015\Projects\Safe\Safe\Safe\bin\Debug\Safe.dll.mdb

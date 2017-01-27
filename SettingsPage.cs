@@ -12,7 +12,7 @@ namespace Safe
         EntryCell password_text, contact_message, contact_number, emergency_number;
         TableSection hardware_section, password_setcion, personal_section, language_section, test_section;
         LanguageCell languagecell;
-        ViewCell test_cell;
+        ViewCell test_cell, map_cell;
         public static string current_language;
         public static string current_language_code;
 
@@ -24,10 +24,19 @@ namespace Safe
             {
                 View = new Label
                 {
-                    Text = "test"
+                    Text = "Display test Page"
                 }
             };
             test_cell.Tapped += Test_cell_Tapped;
+
+            map_cell = new ViewCell()
+            {
+                View = new Label
+                {
+                    Text = "Display Map"
+                }
+            };
+            map_cell.Tapped += Map_cell_Tapped;
 
             test_section = new TableSection
             {
@@ -161,6 +170,11 @@ namespace Safe
                 IsClippedToBounds = true
             };
 
+        }
+
+        private void Map_cell_Tapped(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new MapPage());
         }
 
         private void Test_cell_Tapped(object sender, EventArgs e)
