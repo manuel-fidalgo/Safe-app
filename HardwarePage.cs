@@ -25,11 +25,13 @@ namespace Safe
         static readonly int UPDATE_DELAY = 50; //In ms
         static int paint_counter = 0;
 
+        SKColor BALL, TEXT, GRADIENT0, GRADIENT1;
+
 
         public HardwarePage()
         {
 
-
+            initColors();
             //List for store the accelerometer data
             accelerometer_data = new List<VectorValue>();
             gps_data = new List<VectorValue>();
@@ -56,6 +58,13 @@ namespace Safe
                 );
 
         }
+        private void initColors()
+        {
+            BALL = new SKColor(255, 0, 0);
+            TEXT = new SKColor(165, 167, 159);
+            GRADIENT0 = new SKColor(110, 110, 110);
+            GRADIENT1 = new SKColor(37, 40, 42);
+        }
 
         //Update Loop
         private async Task update()
@@ -73,7 +82,7 @@ namespace Safe
         {
 
             int uheigth, uwidth, H_DIV, W_DIV;
-
+            int middle_width, radius;
             SKCanvas canvas = e.Surface.Canvas;
             int surfaceWidth = e.Info.Width;
             int surfaceHeight = e.Info.Height;
@@ -81,21 +90,25 @@ namespace Safe
 
             uwidth = surfaceWidth / W_DIV;
             uheigth = surfaceHeight / H_DIV;
+            radius = uwidth * 3;
+            middle_width = surfaceWidth / 2;
 
 
             using (SKPaint paint = new SKPaint())
             {
+                canvas.Clear();
                 paint.IsAntialias = true;
+                
+                //Gradient
+                var colors = new SKColor[] { GRADIENT0, GRADIENT1 };
+                var shader = SKShader.CreateRadialGradient(new SKPoint(middle_width, middle_width), radius, colors, null, SKShaderTileMode.Clamp);
+                paint.Shader = shader;
+               
                 paint_counter++;
                 VectorValue glast, alast; //Will contain the las element in the lists
 
-                //Background
-                paint.Color = new SKColor(0xe5, 0xef, 0xff);
-                canvas.DrawRect(new SKRect(0, 0, surfaceWidth, surfaceHeight), paint);
-
                 //Titles
-                paint.Color = new SKColor(0x00, 0x00, 0x00);
-                canvas.DrawText("Paint no->" + paint_counter, 10, 10, paint);
+                paint.Shader = SKShader.CreateColor(TEXT);
                 paint.TextSize = uheigth;
                 canvas.DrawText("GPS:", uwidth, uheigth * 2, paint);
                 canvas.DrawText("Accelerometer:", uwidth, uheigth * 7, paint);
@@ -125,7 +138,6 @@ namespace Safe
                 }
 
                 //Lines
-                paint.Color = new SKColor(0x28, 0x2c, 0xff);  //0x282cff
                 for (int i = 0; i < 3; i++) canvas.DrawLine(uwidth, (uheigth * 2.5f) + i, uwidth * 7, (uheigth * 2.5f) + i, paint);
                 for (int i = 0; i < 3; i++) canvas.DrawLine(uwidth, (uheigth * 7.5f) + i, uwidth * 7, (uheigth * 7.5f) + i, paint);
 
@@ -133,15 +145,14 @@ namespace Safe
                 int left_margin, right_margin, middle_garph;
                 left_margin = uwidth; right_margin = uwidth * 7; middle_garph = uheigth * 12;
 
-                paint.Color = new SKColor(0x00, 0x00, 0x00);
                 canvas.DrawLine(2 * uwidth, middle_garph, uwidth * 6, middle_garph, paint);  //Middle grafico
                 canvas.DrawLine(3 * uwidth, uheigth * 10, uwidth * 5, uheigth * 10, paint);  //Top
                 canvas.DrawLine(3 * uwidth, uheigth * 14, uwidth * 5, uheigth * 14, paint);  //Bottom
 
-                SKColor red, green, blue;
-                red = new SKColor(0xff, 0x00, 0x00);
-                green = new SKColor(0x00, 0xff, 0x00);
-                blue = new SKColor(0x00, 0x00, 0xff);
+                SKShader red, green, blue;
+                red = SKShader.CreateColor(new SKColor(255, 0, 0));
+                green = SKShader.CreateColor(new SKColor(0, 255, 0));
+                blue = SKShader.CreateColor(new SKColor(0, 0, 255));
 
                 if (alast != null)
                 {
@@ -150,7 +161,7 @@ namespace Safe
                     y = (float)alast.y / 5;
                     z = (float)alast.z / 5;
 
-                    paint.Color = red;
+                    paint.Shader = red;
                     if (alast.x > 0)
                     {
                         canvas.DrawRect(new SKRect(2 * uwidth, middle_garph - (x * uheigth), 3 * uwidth, middle_garph), paint); //X red
@@ -160,7 +171,7 @@ namespace Safe
                         canvas.DrawRect(new SKRect(2 * uwidth, middle_garph, 3 * uwidth, middle_garph + (Math.Abs(x) * uheigth)), paint); //X red
                     }
 
-                    paint.Color = green;
+                    paint.Shader = green;
                     if (alast.y > 0)
                     {
                         canvas.DrawRect(new SKRect(3 * uwidth, middle_garph - (y * uheigth), 4 * uwidth, middle_garph), paint); //Y green
@@ -170,7 +181,7 @@ namespace Safe
                         canvas.DrawRect(new SKRect(3 * uwidth, middle_garph, 4 * uwidth, middle_garph + (Math.Abs(y) * uheigth)), paint); //Y green
                     }
 
-                    paint.Color = blue;
+                    paint.Shader = blue;
                     if (alast.z > 0)
                     {
                         canvas.DrawRect(new SKRect(4 * uwidth, middle_garph - (z * uheigth), 5 * uwidth, middle_garph), paint); //Z Blue
@@ -180,7 +191,7 @@ namespace Safe
                         canvas.DrawRect(new SKRect(4 * uwidth, middle_garph, 5 * uwidth, middle_garph + (Math.Abs(z) * uheigth)), paint); //Z Blue
                     }   
                 }
-                displayLayout(canvas, paint, uheigth, uwidth);
+               // displayLayout(canvas, paint, uheigth, uwidth);
             }
         }
         private void displayLayout(SKCanvas canvas, SKPaint paint, int uheigth, int uwidth)

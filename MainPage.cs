@@ -19,7 +19,7 @@ namespace Safe
         SKCanvasView settingsview;
         int angle;
         bool animation_runing;
-        SKColor CIRCLE, BALL, GRADIENT0, GRADIENT1;
+        SKColor TEXT, BALL, GRADIENT0, GRADIENT1;
 
 
         public MainPage()
@@ -70,7 +70,7 @@ namespace Safe
         private void initColors()
         {
             BALL = new SKColor(255,0,0);
-            CIRCLE = new SKColor(165, 167, 159);
+            TEXT = new SKColor(165, 167, 159);
             GRADIENT0 = new SKColor(110,110,110);
             GRADIENT1 = new SKColor(37, 40, 42);
         }
@@ -141,7 +141,7 @@ namespace Safe
                 canvas.DrawPaint(paint);
 
                 //Line
-                paint.Shader = SKShader.CreateColor(CIRCLE);
+                paint.Shader = SKShader.CreateColor(TEXT);
                 for (int i = 0; i < 3; i++) canvas.DrawLine(uwidth, 0 + i, uwidth * 7, 0 + i, paint);
                 //Settings box
                 paint.Shader = SKShader.CreateColor(BALL);
@@ -153,7 +153,7 @@ namespace Safe
                 paint.Style = SKPaintStyle.Fill;
                 paint.TextSize = uheigth;
                 paint.TextAlign = SKTextAlign.Center;
-                paint.Shader = SKShader.CreateColor(CIRCLE);
+                paint.Shader = SKShader.CreateColor(TEXT);
                 canvas.DrawText("Settings", width / 2,(int)(uheigth * 2.5), paint);
             }
         }
@@ -186,14 +186,13 @@ namespace Safe
             
                 //Circle
 
-                paint.Shader = SKShader.CreateColor(CIRCLE);
+                paint.Shader = SKShader.CreateColor(TEXT);
                 paint.Style = SKPaintStyle.Stroke;
-                paint.StrokeWidth = 10;
+                paint.StrokeWidth = 5;
                 canvas.DrawCircle(middle_width, middle_heigth, radius , paint);
                 paint.StrokeWidth = 1;
 
                 paint.Style = SKPaintStyle.StrokeAndFill; 
-                paint.Shader = SKShader.CreateColor(CIRCLE);
                 
                 //Text tap twice
                 paint.TextAlign = SKTextAlign.Center;
