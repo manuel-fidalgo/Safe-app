@@ -8,7 +8,7 @@ using Xamarin.Forms;
 
 namespace Safe
 {
-    class HardwarePage : ContentPage
+    class HardwarePage : CustomPage
     {
         Accelerometer acceler;
         Gps gps;
@@ -25,13 +25,14 @@ namespace Safe
         static readonly int UPDATE_DELAY = 50; //In ms
         static int paint_counter = 0;
 
-        SKColor BALL, TEXT, GRADIENT0, GRADIENT1;
+        
 
 
         public HardwarePage()
         {
 
             initColors();
+
             //List for store the accelerometer data
             accelerometer_data = new List<VectorValue>();
             gps_data = new List<VectorValue>();
@@ -58,13 +59,7 @@ namespace Safe
                 );
 
         }
-        private void initColors()
-        {
-            BALL = new SKColor(255, 0, 0);
-            TEXT = new SKColor(165, 167, 159);
-            GRADIENT0 = new SKColor(110, 110, 110);
-            GRADIENT1 = new SKColor(37, 40, 42);
-        }
+        
 
         //Update Loop
         private async Task update()
@@ -98,11 +93,9 @@ namespace Safe
             {
                 canvas.Clear();
                 paint.IsAntialias = true;
-                
+
                 //Gradient
-                var colors = new SKColor[] { GRADIENT0, GRADIENT1 };
-                var shader = SKShader.CreateRadialGradient(new SKPoint(middle_width, middle_width), radius, colors, null, SKShaderTileMode.Clamp);
-                paint.Shader = shader;
+                createGradient(paint,surfaceWidth,surfaceHeight);
                
                 paint_counter++;
                 VectorValue glast, alast; //Will contain the las element in the lists
@@ -149,10 +142,7 @@ namespace Safe
                 canvas.DrawLine(3 * uwidth, uheigth * 10, uwidth * 5, uheigth * 10, paint);  //Top
                 canvas.DrawLine(3 * uwidth, uheigth * 14, uwidth * 5, uheigth * 14, paint);  //Bottom
 
-                SKShader red, green, blue;
-                red = SKShader.CreateColor(new SKColor(255, 0, 0));
-                green = SKShader.CreateColor(new SKColor(0, 255, 0));
-                blue = SKShader.CreateColor(new SKColor(0, 0, 255));
+               
 
                 if (alast != null)
                 {
@@ -161,7 +151,7 @@ namespace Safe
                     y = (float)alast.y / 5;
                     z = (float)alast.z / 5;
 
-                    paint.Shader = red;
+                    paint.Shader = GRAPH0;
                     if (alast.x > 0)
                     {
                         canvas.DrawRect(new SKRect(2 * uwidth, middle_garph - (x * uheigth), 3 * uwidth, middle_garph), paint); //X red
@@ -171,7 +161,7 @@ namespace Safe
                         canvas.DrawRect(new SKRect(2 * uwidth, middle_garph, 3 * uwidth, middle_garph + (Math.Abs(x) * uheigth)), paint); //X red
                     }
 
-                    paint.Shader = green;
+                    paint.Shader = GRAPH1;
                     if (alast.y > 0)
                     {
                         canvas.DrawRect(new SKRect(3 * uwidth, middle_garph - (y * uheigth), 4 * uwidth, middle_garph), paint); //Y green
@@ -181,7 +171,7 @@ namespace Safe
                         canvas.DrawRect(new SKRect(3 * uwidth, middle_garph, 4 * uwidth, middle_garph + (Math.Abs(y) * uheigth)), paint); //Y green
                     }
 
-                    paint.Shader = blue;
+                    paint.Shader = GRAPH2;
                     if (alast.z > 0)
                     {
                         canvas.DrawRect(new SKRect(4 * uwidth, middle_garph - (z * uheigth), 5 * uwidth, middle_garph), paint); //Z Blue

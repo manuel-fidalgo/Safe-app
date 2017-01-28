@@ -8,18 +8,20 @@ using System.Threading;
 
 namespace Safe
 {
-    public class MainPage : ContentPage
+    public class MainPage : CustomPage
     {
 
         static readonly int MAX_MILISECONDS = 3000;
 
         SettingsPage settings_page;
+
         NavigationPage nav_page;
         SKCanvasView activityview;
         SKCanvasView settingsview;
+
         int angle;
         bool animation_runing;
-        SKColor TEXT, BALL, GRADIENT0, GRADIENT1;
+        
 
 
         public MainPage()
@@ -67,13 +69,7 @@ namespace Safe
             Content = l;
         }
 
-        private void initColors()
-        {
-            BALL = new SKColor(255,0,0);
-            TEXT = new SKColor(165, 167, 159);
-            GRADIENT0 = new SKColor(110,110,110);
-            GRADIENT1 = new SKColor(37, 40, 42);
-        }
+        
 
         private void StartAnimation()
         {
@@ -162,12 +158,13 @@ namespace Safe
         private void View_PaintSurface(object sender, SKPaintSurfaceEventArgs e)
         {
             SKCanvas canvas = e.Surface.Canvas;
-            int width, heigth, uheigth, uwidth;
+            int surfaceWidth, surfaceHeight, uheigth, uwidth;
 
-            width = e.Info.Width;
-            heigth = e.Info.Height;
-            uheigth = heigth / 14;
-            uwidth = width / 8;
+            surfaceWidth = e.Info.Width;
+            surfaceHeight = e.Info.Height;
+
+            uheigth = surfaceHeight / 14;
+            uwidth =surfaceWidth/ 8;
 
 
             int middle_width = e.Info.Width / 2;
@@ -178,12 +175,10 @@ namespace Safe
             using (SKPaint paint = new SKPaint())
             {
                 canvas.Clear();
-                var colors = new SKColor[] { GRADIENT0,GRADIENT1 };
+                
+                //Gradient
+                createGradient(paint, surfaceWidth, surfaceHeight);
 
-                var shader = SKShader.CreateRadialGradient(new SKPoint(middle_width,middle_width),radius,colors,null,SKShaderTileMode.Clamp) ;
-                paint.Shader = shader;
-                canvas.DrawPaint(paint);
-            
                 //Circle
 
                 paint.Shader = SKShader.CreateColor(TEXT);

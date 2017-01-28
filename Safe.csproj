@@ -36,6 +36,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Accelerometer.cs" />
+    <Compile Include="CustomPage.cs" />
     <Compile Include="DataReader.cs" />
     <Compile Include="HardwarePage.cs" />
     <Compile Include="App.cs" />
