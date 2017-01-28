@@ -169,15 +169,18 @@ namespace Safe
 
             int middle_width = e.Info.Width / 2;
             int middle_heigth = 5 * uheigth;
-            int radius = 3 * uwidth;
-
+            int radius = 0;
+            if (uwidth > uheigth)
+                radius = 3 * uwidth;
+            else
+                radius = 3 * uheigth;
             
             using (SKPaint paint = new SKPaint())
             {
                 canvas.Clear();
                 
                 //Gradient
-                createGradient(paint, surfaceWidth, surfaceHeight);
+                createGradient(canvas,paint, surfaceWidth, surfaceHeight);
 
                 //Circle
 

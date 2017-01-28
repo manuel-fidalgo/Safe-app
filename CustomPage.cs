@@ -23,22 +23,21 @@ namespace Safe
             GRADIENT0 = new SKColor(110, 110, 110);
             GRADIENT1 = new SKColor(37, 40, 42);
 
-            GRAPH0 = SKShader.CreateColor(new SKColor(0, 255, 0));
-            GRAPH0 = SKShader.CreateColor(new SKColor(255, 255, 255));
-            GRAPH0 = SKShader.CreateColor(new SKColor(255, 0, 0));
+            GRAPH0 = SKShader.CreateColor(new SKColor(80, 240, 60));
+            GRAPH1 = SKShader.CreateColor(new SKColor(255, 255, 255));
+            GRAPH2 = SKShader.CreateColor(new SKColor(250, 0, 0));
         }
 
         //Creates and paint the background gradient
-        protected void createGradient(SKPaint paint,int surfaceWidth, int surfaceHeight)
+        protected void createGradient(SKCanvas canvas, SKPaint paint,int surfaceWidth, int surfaceHeight)
         {
             var colors = new SKColor[] { GRADIENT0, GRADIENT1 };
 
-            var shader = SKShader.CreateRadialGradient(new SKPoint(surfaceWidth / 2, surfaceWidth / 2),
-                                                        surfaceWidth / 3, colors, null, SKShaderTileMode.Clamp);
-
-            var shader_ = SKShader.CreateLinearGradient(new SKPoint(0,0), new SKPoint(surfaceWidth,surfaceHeight),
-                                                        colors,null,SKShaderTileMode.Clamp);
-            paint.Shader = shader_;
+            var shader = SKShader.CreateRadialGradient(new SKPoint(surfaceWidth / 2, surfaceHeight / 2),
+                                                        surfaceWidth / 2, colors, null, SKShaderTileMode.Clamp);
+            paint.Shader = shader;
+            canvas.DrawPaint(paint);
+            
         }
     }
 }

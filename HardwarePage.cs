@@ -95,7 +95,7 @@ namespace Safe
                 paint.IsAntialias = true;
 
                 //Gradient
-                createGradient(paint,surfaceWidth,surfaceHeight);
+                createGradient(canvas, paint,surfaceWidth,surfaceHeight);
                
                 paint_counter++;
                 VectorValue glast, alast; //Will contain the las element in the lists
@@ -150,35 +150,44 @@ namespace Safe
                     x = (float)alast.x / 5;
                     y = (float)alast.y / 5;
                     z = (float)alast.z / 5;
+                    int graphbar_width = (int)((4.0 / 3.0) * uwidth);
+                    int x_init = 2 * uwidth;
 
+                    //The first bar in the graph
                     paint.Shader = GRAPH0;
                     if (alast.x > 0)
                     {
-                        canvas.DrawRect(new SKRect(2 * uwidth, middle_garph - (x * uheigth), 3 * uwidth, middle_garph), paint); //X red
+                        canvas.DrawRect(new SKRect(x_init, middle_garph - (x * uheigth), 
+                                                  (x_init + graphbar_width), middle_garph), paint); //X red
                     }
                     else
                     {   //In this case x will have a negative value, h+uheigth too, so we have to use abs()
-                        canvas.DrawRect(new SKRect(2 * uwidth, middle_garph, 3 * uwidth, middle_garph + (Math.Abs(x) * uheigth)), paint); //X red
+                        canvas.DrawRect(new SKRect(x_init, middle_garph, 
+                                                  (x_init + graphbar_width) ,middle_garph + (Math.Abs(x) * uheigth)), paint); //X red
                     }
-
+                    //The second bar in the graph
                     paint.Shader = GRAPH1;
                     if (alast.y > 0)
                     {
-                        canvas.DrawRect(new SKRect(3 * uwidth, middle_garph - (y * uheigth), 4 * uwidth, middle_garph), paint); //Y green
+                        canvas.DrawRect(new SKRect((x_init + graphbar_width), middle_garph - (y * uheigth), 
+                                                   (x_init + 2 * graphbar_width), middle_garph), paint); 
                     }
                     else
                     {
-                        canvas.DrawRect(new SKRect(3 * uwidth, middle_garph, 4 * uwidth, middle_garph + (Math.Abs(y) * uheigth)), paint); //Y green
+                        canvas.DrawRect(new SKRect((x_init + graphbar_width), middle_garph, 
+                                                   (x_init +  2 * graphbar_width), middle_garph + (Math.Abs(y) * uheigth)), paint);
                     }
-
+                    //The thirth bar in the graph
                     paint.Shader = GRAPH2;
                     if (alast.z > 0)
                     {
-                        canvas.DrawRect(new SKRect(4 * uwidth, middle_garph - (z * uheigth), 5 * uwidth, middle_garph), paint); //Z Blue
+                        canvas.DrawRect(new SKRect((x_init + 2 * graphbar_width), middle_garph - (z * uheigth), 
+                                                   (x_init + 3 * graphbar_width), middle_garph), paint); 
                     }
                     else
                     {
-                        canvas.DrawRect(new SKRect(4 * uwidth, middle_garph, 5 * uwidth, middle_garph + (Math.Abs(z) * uheigth)), paint); //Z Blue
+                        canvas.DrawRect(new SKRect((x_init + 2 * graphbar_width), middle_garph, 
+                                                   (x_init + 3 * graphbar_width), middle_garph + (Math.Abs(z) * uheigth)), paint); 
                     }   
                 }
                // displayLayout(canvas, paint, uheigth, uwidth);
