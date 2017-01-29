@@ -21,7 +21,7 @@ namespace Safe
 
         int angle;
         bool animation_runing;
-        
+
 
 
         public MainPage()
@@ -36,19 +36,27 @@ namespace Safe
 
             var tapGestureRecognizer = new TapGestureRecognizer();
             var tapGestureRecognizer_settings = new TapGestureRecognizer();
+            var tapGestureRecognizer_settings_double_tap = new TapGestureRecognizer();
 
             activityview = new SKCanvasView();
             settingsview = new SKCanvasView();
 
+            //Tapped events
             tapGestureRecognizer.Tapped += TapGestureRecognizer_Tapped;
             tapGestureRecognizer_settings.Tapped += TapGestureRecognizer_settings_Tapped;
+            tapGestureRecognizer_settings_double_tap.Tapped += TapGestureRecognizer_settings_double_tap_Tapped;
+            //Nuber os taps
             tapGestureRecognizer.NumberOfTapsRequired = 2;
+            tapGestureRecognizer_settings_double_tap.NumberOfTapsRequired = 2;
+
+
 
             activityview.PaintSurface += View_PaintSurface;
             settingsview.PaintSurface += Settingsview_PaintSurface;
 
             activityview.GestureRecognizers.Add(tapGestureRecognizer);
             settingsview.GestureRecognizers.Add(tapGestureRecognizer_settings);
+            settingsview.GestureRecognizers.Add(tapGestureRecognizer_settings_double_tap);
 
 
             int uheigth = (int)(Height / 16);
@@ -69,7 +77,10 @@ namespace Safe
             Content = l;
         }
 
-        
+        private void TapGestureRecognizer_settings_double_tap_Tapped(object sender, EventArgs e)
+        {
+            FinishAnimation();
+        }
 
         private void StartAnimation()
         {
@@ -83,17 +94,21 @@ namespace Safe
         private void FinishAnimation()
         {
             animation_runing = false;
+            settingsview.InvalidateSurface();
         }
 
         private async Task Animation()
         {
+            
             animation_runing = true;
+            settingsview.InvalidateSurface();
             while (animation_runing)
             {
                 if (angle >= 360)
                 {
                     angle = 0;
-                    await DisplayAlert("Alert", "Are you ok?", "OK");
+                    FinishAnimation();
+                    AlertMode();
                 }
                 else
                 {
@@ -103,6 +118,54 @@ namespace Safe
                 await Task.Delay(MAX_MILISECONDS / 360); //One cycle for each 3 seconds
             }
         }
+
+        private async void AlertMode()
+        {
+            
+            Task t = Task.Factory.StartNew(
+               () => Vibrate(),
+               CancellationToken.None,
+               TaskCreationOptions.None,
+               TaskScheduler.FromCurrentSynchronizationContext()
+               );
+            
+            Task l = Task.Factory.StartNew(
+               () => ShowDialog(t),
+               CancellationToken.None,
+               TaskCreationOptions.None,
+               TaskScheduler.FromCurrentSynchronizationContext()
+               );
+
+        }
+
+        private async Task ShowDialog(Task t)
+        {
+            
+            var answer = await DisplayAlert("ALERT", "Are you okay?", "Yes", "No");
+            
+            if (answer)
+            {
+                //
+            }else
+            {
+                var answer2 = await DisplayAlert("INFO", "Do you want to send the message?", "Yes", "No");
+               if (answer2)
+                {
+                    MessageManager.sendAlertMessage();
+                }
+            }
+        }
+
+        private async Task Vibrate()
+        {
+            for (int i = 0; i < 10; i++)
+            {
+                await Task.Delay(100);
+                VibrationManager.vibrate(900);
+            }
+            MessageManager.sendAlertMessage();
+        }
+
 
         private void TapGestureRecognizer_settings_Tapped(object sender, EventArgs e)
         {
@@ -139,19 +202,22 @@ namespace Safe
                 //Line
                 paint.Shader = SKShader.CreateColor(TEXT);
                 for (int i = 0; i < 3; i++) canvas.DrawLine(uwidth, 0 + i, uwidth * 7, 0 + i, paint);
-                
+
                 //Texts
                 paint.Style = SKPaintStyle.Fill;
-                paint.TextSize = (int)(1.5*uheigth);
                 paint.TextAlign = SKTextAlign.Center;
                 paint.Shader = SKShader.CreateColor(TEXT);
-                canvas.DrawText("Settings", width/2 ,(int)(uheigth * 2.5), paint);
+                if (!animation_runing)
+                {
+                    paint.TextSize = (int)(1.5 * uheigth);
+                    canvas.DrawText("Settings", width / 2, (int)(uheigth * 2.5), paint);
+                }
+                else
+                {
+                    paint.TextSize = (uheigth);
+                    canvas.DrawText("Tap twice for stop", width / 2, (int)(uheigth * 2.5), paint);
+                }
 
-                /*
-                paint.Style = SKPaintStyle.Stroke;
-                paint.StrokeWidth = 5;
-                canvas.DrawRoundRect(new SKRect(uheigth,uwidth,width-uwidth,heigth-uheigth),30,30,paint);
-                */
             }
         }
 
@@ -165,30 +231,30 @@ namespace Safe
             surfaceHeight = e.Info.Height;
 
             uheigth = surfaceHeight / 14;
-            uwidth =surfaceWidth/ 8;
+            uwidth = surfaceWidth / 8;
 
 
             int middle_width = e.Info.Width / 2;
             int middle_heigth = 5 * uheigth;
             int radius = 4 * uheigth;
-            
+
             using (SKPaint paint = new SKPaint())
             {
                 canvas.Clear();
-                
+
                 //Gradient
-                createGradient(canvas,paint, surfaceWidth, surfaceHeight);
+                createGradient(canvas, paint, surfaceWidth, surfaceHeight);
 
                 //Circle
 
                 paint.Shader = SKShader.CreateColor(TEXT);
                 paint.Style = SKPaintStyle.Stroke;
                 paint.StrokeWidth = 5;
-                canvas.DrawCircle(middle_width, middle_heigth, radius , paint);
+                canvas.DrawCircle(middle_width, middle_heigth, radius, paint);
                 paint.StrokeWidth = 1;
 
-                paint.Style = SKPaintStyle.StrokeAndFill; 
-                
+                paint.Style = SKPaintStyle.StrokeAndFill;
+
                 //Text tap twice
                 paint.TextAlign = SKTextAlign.Center;
                 paint.TextSize = uheigth;

@@ -63,6 +63,7 @@
     </Compile>
     <Compile Include="SettingsPage.cs" />
     <Compile Include="SettingsWrap.cs" />
+    <Compile Include="VibrationManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="DeviceMotion.Plugin, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -141,9 +142,6 @@
       <LastGenOutput>AppResources.Designer.cs</LastGenOutput>
       <CustomToolNamespace>Safe</CustomToolNamespace>
     </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="img.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets" Condition="Exists('..\..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" />
