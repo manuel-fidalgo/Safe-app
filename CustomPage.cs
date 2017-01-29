@@ -1,20 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xamarin.Forms;
 using SkiaSharp;
-using SkiaSharp.Views.Forms;
+using System.IO;
 using System.Reflection;
-using System.Threading;
 
 namespace Safe
-{ 
+{
     public abstract class CustomPage : ContentPage
     {
         protected SKColor BALL, TEXT, GRADIENT0, GRADIENT1;
-        protected SKShader GRAPH0, GRAPH1, GRAPH2;
+        protected SKShader GRAPH0, GRAPH1, GRAPH2, BLUEGRADIENT;
 
         protected void initColors()
         {
@@ -23,9 +18,16 @@ namespace Safe
             GRADIENT0 = new SKColor(110, 110, 110);
             GRADIENT1 = new SKColor(37, 40, 42);
 
-            GRAPH0 = SKShader.CreateColor(new SKColor(80, 240, 60));
+            //GRAPH0 = SKShader.CreateColor(new SKColor(80, 240, 60));
+            GRAPH0 = SKShader.CreateColor(new SKColor(22, 122, 32));
             GRAPH1 = SKShader.CreateColor(new SKColor(255, 255, 255));
             GRAPH2 = SKShader.CreateColor(new SKColor(250, 0, 0));
+
+            var colors = new SKColor[] { new SKColor(0,100,255), new SKColor(0,0,255) };
+
+            BLUEGRADIENT = SKShader.CreateLinearGradient(new SKPoint(0, 0), new SKPoint(50, 50),
+                                                        colors, null, SKShaderTileMode.Clamp);
+
         }
 
         //Creates and paint the background gradient
@@ -38,6 +40,19 @@ namespace Safe
             paint.Shader = shader;
             canvas.DrawPaint(paint);
             
+        }
+        protected void drawImage(SKCanvas canvas, SKRect place ,String path)
+        {
+            var assembly = typeof(CustomPage).GetTypeInfo().Assembly;
+            Stream stream = assembly.GetManifestResourceStream(path);
+
+            // decode the bitmap from the stream
+            using (var stream_ = new SKManagedStream(stream))
+            using (var bitmap = SKBitmap.Decode(stream_))
+            using (var paint = new SKPaint())
+            {
+                canvas.DrawBitmap(bitmap, place, paint);
+            }
         }
     }
 }

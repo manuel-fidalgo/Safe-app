@@ -139,18 +139,19 @@ namespace Safe
                 //Line
                 paint.Shader = SKShader.CreateColor(TEXT);
                 for (int i = 0; i < 3; i++) canvas.DrawLine(uwidth, 0 + i, uwidth * 7, 0 + i, paint);
-                //Settings box
-                paint.Shader = SKShader.CreateColor(BALL);
-                paint.Style = SKPaintStyle.Stroke;
-                paint.StrokeWidth = 5;      //Bigger wrapper                
-                canvas.DrawRoundRect(new SKRect(2 * uwidth, 1 * uheigth, 6 * uwidth,3 * uheigth), 20, 20, paint);
-                paint.StrokeWidth = 1;
+                
                 //Texts
                 paint.Style = SKPaintStyle.Fill;
-                paint.TextSize = uheigth;
+                paint.TextSize = (int)(1.5*uheigth);
                 paint.TextAlign = SKTextAlign.Center;
                 paint.Shader = SKShader.CreateColor(TEXT);
-                canvas.DrawText("Settings", width / 2,(int)(uheigth * 2.5), paint);
+                canvas.DrawText("Settings", width/2 ,(int)(uheigth * 2.5), paint);
+
+                /*
+                paint.Style = SKPaintStyle.Stroke;
+                paint.StrokeWidth = 5;
+                canvas.DrawRoundRect(new SKRect(uheigth,uwidth,width-uwidth,heigth-uheigth),30,30,paint);
+                */
             }
         }
 
@@ -169,11 +170,7 @@ namespace Safe
 
             int middle_width = e.Info.Width / 2;
             int middle_heigth = 5 * uheigth;
-            int radius = 0;
-            if (uwidth > uheigth)
-                radius = 3 * uwidth;
-            else
-                radius = 3 * uheigth;
+            int radius = 4 * uheigth;
             
             using (SKPaint paint = new SKPaint())
             {
