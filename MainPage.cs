@@ -79,6 +79,7 @@ namespace Safe
 
         private void TapGestureRecognizer_settings_double_tap_Tapped(object sender, EventArgs e)
         {
+            VibrationManager.vibrate(500);
             FinishAnimation();
         }
 
@@ -94,6 +95,7 @@ namespace Safe
         private void FinishAnimation()
         {
             animation_runing = false;
+            angle = 0;
             settingsview.InvalidateSurface();
             activityview.InvalidateSurface();
         }

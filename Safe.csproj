@@ -41,7 +41,6 @@
     <Compile Include="HardwarePage.cs" />
     <Compile Include="App.cs" />
     <Compile Include="Gps.cs" />
-    <Compile Include="LanguageCell.cs" />
     <Compile Include="LanguagesList.cs" />
     <Compile Include="PageManager.cs" />
     <Compile Include="MainPage.cs" />
@@ -63,7 +62,7 @@
     </Compile>
     <Compile Include="SettingsPage.cs" />
     <Compile Include="SettingsWrap.cs" />
-    <Compile Include="VibrationManager.cs" />
+    <Compile Include="Managers.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="DeviceMotion.Plugin, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">

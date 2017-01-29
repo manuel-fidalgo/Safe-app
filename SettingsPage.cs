@@ -11,36 +11,32 @@ namespace Safe
         SwitchCell gps_cell, accelerometer_cell, vibration_cell, password_cell;
         EntryCell password_text, contact_message, contact_number, emergency_number;
         TableSection hardware_section, password_setcion, personal_section, language_section, test_section;
-        LanguageCell languagecell;
-        ViewCell test_cell, map_cell;
+        TextCell test_cell,map_cell,languagecell;
         public static string current_language;
         public static string current_language_code;
 
+        Color textColor = Color.FromRgb(165, 167, 159);
 
         public SettingsPage()
         {
 
-            test_cell = new ViewCell()
+            test_cell = new TextCell()
             {
-                View = new Label
-                {
-                    Text = "Display test Page"
-                }
+                Text = "Display Test Page",
+                TextColor = textColor
             };
             test_cell.Tapped += Test_cell_Tapped;
 
-            map_cell = new ViewCell()
+            map_cell = new TextCell()
             {
-                View = new Label
-                {
-                    Text = "Display Map"
-                }
+                Text = "Show Map",
+                TextColor = textColor
             };
-            map_cell.Tapped += Map_cell_Tapped;
-
-            test_section = new TableSection
+            
+            test_section = new TableSection("Testing")
             {
-                test_cell
+                test_cell,
+                map_cell
             };
 
            
@@ -50,7 +46,7 @@ namespace Safe
 
             gps_cell = new SwitchCell
             {
-                Text = AppResources.gps_status
+                Text = AppResources.gps_status,
             };
             
 
@@ -98,11 +94,13 @@ namespace Safe
             contact_message = new EntryCell
             {
                 Label = AppResources.contact_message,
+                LabelColor = textColor
             };
 
             contact_number = new EntryCell
             {
                 Label = AppResources.contact_number,
+                LabelColor = textColor
             };
 
             emergency_number = new EntryCell
@@ -121,27 +119,26 @@ namespace Safe
 
             //Language cell
 
-            languagecell = new LanguageCell(this);
+            languagecell = new TextCell()
+            {
+                Text = "Chooose language",
+                TextColor = textColor
+            };
+            languagecell.Tapped += Languagecell_Tapped;
 
             language_section = new TableSection(AppResources.language)
             {
                 languagecell
             };
 
-            //Save button
+            //Save cell
 
-            var save_button = new Button
+            var save_cell = new TextCell()
             {
-                Text = AppResources.save,
-                TextColor = Color.FromRgb(51, 181, 229)
+                Text = "Save Settings",
+                TextColor = textColor
             };
-
-            save_button.Clicked += Save_button_Clicked;
-
-            var save_cell = new ViewCell
-            {
-                View = save_button
-            };
+            save_cell.Tapped += Save_button_Clicked;
 
             var save_section = new TableSection(AppResources.save_settings)
             {
@@ -170,6 +167,11 @@ namespace Safe
                 IsClippedToBounds = true
             };
 
+        }
+
+        private void Languagecell_Tapped(object sender, EventArgs e)
+        {
+            showLanguajesList();
         }
 
         private void Map_cell_Tapped(object sender, EventArgs e)

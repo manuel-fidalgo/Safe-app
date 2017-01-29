@@ -11,58 +11,49 @@ namespace Safe
     {
 
         //XML file with the settings
-        public static readonly String[] LANGUAGES_CODE = new String[] {"EN","ES","IT","DE","FR"};
-        public static readonly String[] LANGUAGES = new String[] {"  English", "  Spanish","  Italian","  Germany","  French"};
+        public static readonly String[] LANGUAGES_CODE = new String[] { "EN", "ES", "IT", "DE", "FR" };
+        public static readonly String[] LANGUAGES = new String[] { "  English", "  Spanish", "  Italian", "  Germany", "  French" };
 
-       
+        Color textColor = Color.FromRgb(165, 167, 159);
+
         public LanguagesList()
         {
 
 
-           
-            var english_cell = new ViewCell()
+
+            var english_cell = new TextCell()
             {
-                View = new Label()
-                {
-                    Text = LANGUAGES[0]
-                }
+                Text = LANGUAGES[0],
+                TextColor = textColor
             };
             english_cell.Tapped += English_cell_Tapped;
 
-            var spanish_cell = new ViewCell()
+            var spanish_cell = new TextCell()
             {
-                View = new Label()
-                {
-                    Text = LANGUAGES[1]
-                }
+                Text = LANGUAGES[1],
+                TextColor = textColor
             };
             spanish_cell.Tapped += Spanish_cell_Tapped;
 
-          
-            var italian_cell = new ViewCell
+
+            var italian_cell = new TextCell()
             {
-                View = new Label()
-                {
-                    Text = LANGUAGES[2]
-                }
+                Text = LANGUAGES[2],
+                TextColor = textColor
             };
             italian_cell.Tapped += Italian_cell_Tapped;
 
-            var german_cell = new ViewCell
+            var german_cell = new TextCell()
             {
-                View = new Label()
-                {
-                    Text = LANGUAGES[3]
-                }
+                Text = LANGUAGES[3],
+                TextColor = textColor
             };
             german_cell.Tapped += German_cell_Tapped;
 
-            var french_cell = new ViewCell
+            var french_cell = new TextCell()
             {
-                View = new Label()
-                {
-                    Text = LANGUAGES[4]
-                }
+                Text = LANGUAGES[4],
+                TextColor = textColor
             };
             french_cell.Tapped += French_cell_Tapped;
 
