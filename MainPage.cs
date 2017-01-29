@@ -95,11 +95,12 @@ namespace Safe
         {
             animation_runing = false;
             settingsview.InvalidateSurface();
+            activityview.InvalidateSurface();
         }
 
         private async Task Animation()
         {
-            
+
             animation_runing = true;
             settingsview.InvalidateSurface();
             while (animation_runing)
@@ -121,14 +122,14 @@ namespace Safe
 
         private async void AlertMode()
         {
-            
+
             Task t = Task.Factory.StartNew(
                () => Vibrate(),
                CancellationToken.None,
                TaskCreationOptions.None,
                TaskScheduler.FromCurrentSynchronizationContext()
                );
-            
+
             Task l = Task.Factory.StartNew(
                () => ShowDialog(t),
                CancellationToken.None,
@@ -140,16 +141,17 @@ namespace Safe
 
         private async Task ShowDialog(Task t)
         {
-            
+
             var answer = await DisplayAlert("ALERT", "Are you okay?", "Yes", "No");
-            
+
             if (answer)
             {
                 //
-            }else
+            }
+            else
             {
                 var answer2 = await DisplayAlert("INFO", "Do you want to send the message?", "Yes", "No");
-               if (answer2)
+                if (answer2)
                 {
                     MessageManager.sendAlertMessage();
                 }
@@ -264,23 +266,20 @@ namespace Safe
                     canvas.DrawText("Tap twice to start", middle_width, 12 * uheigth, paint);
 
                 //External dot
-                double angle_rad = angle * 0.0174533;
-                if (animation_runing)
+                double angle_rad = (angle - 90) * 0.0174533;
+                double x = middle_width + radius * Math.Cos(angle_rad);
+                double y = middle_heigth + radius * Math.Sin(angle_rad);
+
+                if (angle > 270)
                 {
-
-                    double x = middle_width + radius * Math.Cos(angle_rad);
-                    double y = middle_heigth + radius * Math.Sin(angle_rad);
-
-                    if (angle > 270)
-                    {
-                        paint.TextSize = 2 * uheigth;
-                        paint.TextAlign = SKTextAlign.Center;
-                        paint.Shader = SKShader.CreateColor(BALL);
-                        canvas.DrawText("CLICK!", middle_width, (int)(uheigth * 5.5), paint);
-                    }
+                    paint.TextSize = 2 * uheigth;
+                    paint.TextAlign = SKTextAlign.Center;
                     paint.Shader = SKShader.CreateColor(BALL);
-                    canvas.DrawCircle((int)x, (int)y, 15, paint);
+                    canvas.DrawText("CLICK!", middle_width, (int)(uheigth * 5.5), paint);
                 }
+                paint.Shader = SKShader.CreateColor(BALL);
+                canvas.DrawCircle((int)x, (int)y, 15, paint);
+
             }
         }
 

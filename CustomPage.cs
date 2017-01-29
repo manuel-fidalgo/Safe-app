@@ -13,7 +13,7 @@ namespace Safe
 
         protected void initColors()
         {
-            BALL = new SKColor(255, 0, 0);
+            BALL = new SKColor(0, 100, 255);
             TEXT = new SKColor(165, 167, 159);
             GRADIENT0 = new SKColor(110, 110, 110);
             GRADIENT1 = new SKColor(37, 40, 42);
