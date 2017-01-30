@@ -11,11 +11,11 @@ namespace Safe
 {
     public class MapPage : ContentPage
     {
+        public static VectorValue last_coordinates;
+
         public MapPage()
         {
-            var map = new Map(
-                MapSpan.FromCenterAndRadius(
-                        new Position(37, -122), Distance.FromMiles(0.3)))
+            var map = new Map(MapSpan.FromCenterAndRadius(new Position(last_coordinates.x,last_coordinates.y), Distance.FromMiles(0.3)))
             {
                 IsShowingUser = true,
                 HeightRequest = 100,

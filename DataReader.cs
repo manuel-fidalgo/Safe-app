@@ -15,6 +15,7 @@ namespace Safe
         List<VectorValue> gps_data;
         ContentPage notification_page;
 
+        
         public DataReader(List<VectorValue> a_data, List<VectorValue> g_data)
         {
             notification_page = new ContentPage();

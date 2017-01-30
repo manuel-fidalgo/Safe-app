@@ -43,6 +43,7 @@ namespace Safe
         //Add the last location to the buffer
         public async void getGpsLocation()
         {
+            VectorValue coor;
             try
             {
                 var position = await locator.GetPositionAsync(10000);
@@ -52,11 +53,13 @@ namespace Safe
                     gps_data.RemoveAt(0);
                     buffer_counter--;
                 }
-                gps_data.Add(new VectorValue(position.Latitude,position.Longitude,position.Timestamp));
+                coor = new VectorValue(position.Latitude, position.Longitude, position.Timestamp);
+                gps_data.Add(coor);
+                MapPage.last_coordinates = coor; //Will update the las coordinates in the map page 
                 buffer_counter++;
             }
             catch (Exception){
-                gps_data.Add(new VectorValue(0,0,0));
+                //gps_data.Add(new VectorValue(0,0,0));
             }
         }
 

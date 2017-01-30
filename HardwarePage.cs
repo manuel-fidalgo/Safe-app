@@ -19,6 +19,7 @@ namespace Safe
 
         List<VectorValue> accelerometer_data;
         List<VectorValue> gps_data;
+        
 
         static readonly int DATA_BUFFER_SIZE = 50;
 
@@ -206,7 +207,7 @@ namespace Safe
         }
     }
     //Wraps the x y z values from the accelerometer
-    class VectorValue
+    public class VectorValue
     {
         public double x, y, z;
         public DateTimeOffset stamp;
