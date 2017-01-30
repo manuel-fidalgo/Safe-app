@@ -15,6 +15,7 @@ namespace Safe
 
         public MapPage()
         {
+            
             var map = new Map(MapSpan.FromCenterAndRadius(new Position(last_coordinates.x,last_coordinates.y), Distance.FromMiles(0.3)))
             {
                 IsShowingUser = true,
@@ -25,6 +26,7 @@ namespace Safe
             var stack = new StackLayout { Spacing = 0 };
             stack.Children.Add(map);
             Content = stack;
+            
         }
     }
 }

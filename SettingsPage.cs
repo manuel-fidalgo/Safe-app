@@ -17,9 +17,16 @@ namespace Safe
 
         Color textColor = Color.FromRgb(165, 167, 159);
 
+        MapPage map_page;
+        HardwarePage hardware_page;
+
         public SettingsPage()
         {
+            //Create the two subpages
+            // map_page = new MapPage();    //BUG IN MAP PAGE!
+            hardware_page = new HardwarePage();
 
+            //Create all the items in the settings menu
             test_cell = new TextCell()
             {
                 Text = "Display Test Page",
@@ -32,6 +39,7 @@ namespace Safe
                 Text = "Show Map",
                 TextColor = textColor
             };
+            map_cell.Tapped += Map_cell_Tapped;
             
             test_section = new TableSection("Testing")
             {
@@ -169,6 +177,7 @@ namespace Safe
 
         }
 
+       
         private void Languagecell_Tapped(object sender, EventArgs e)
         {
             showLanguajesList();
@@ -176,12 +185,12 @@ namespace Safe
 
         private void Map_cell_Tapped(object sender, EventArgs e)
         {
-            Navigation.PushAsync(new HardwarePage());
+            Navigation.PushAsync(map_page);
         }
 
         private void Test_cell_Tapped(object sender, EventArgs e)
         {
-            Navigation.PushAsync(new HardwarePage());
+            Navigation.PushAsync(hardware_page);
         }
 
         private void Password_cell_OnChanged(object sender, ToggledEventArgs e)
