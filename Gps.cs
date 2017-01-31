@@ -9,7 +9,6 @@ namespace Safe
     {
         
         public static readonly int ACCURACY = 1; //Acuracy for the gps (meters)
-        static Gps gps_singleton;
 
         List<VectorValue> gps_data;
         List<double> gps_speed_buffer;
@@ -39,11 +38,12 @@ namespace Safe
             buffer_counter = 0; buffer_speed_counter = 0;
         }
 
-        
+        VectorValue last_added;
         //Add the last location to the buffer
         public async void getGpsLocation()
         {
             VectorValue coor;
+         
             try
             {
                 var position = await locator.GetPositionAsync(10000);
@@ -57,9 +57,11 @@ namespace Safe
                 gps_data.Add(coor);
                 MapPage.last_coordinates = coor; //Will update the las coordinates in the map page 
                 buffer_counter++;
+                last_added = coor; //The location is correct
             }
             catch (Exception){
-                //gps_data.Add(new VectorValue(0,0,0));
+                //Any error, we are goint to repeat the last correct value
+                gps_data.Add(last_added);
             }
         }
 

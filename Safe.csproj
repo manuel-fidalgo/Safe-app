@@ -125,7 +125,7 @@
     <None Include="ClassDiagram1.cd" />
     <None Include="GettingStarted.Xamarin" />
     <None Include="packages.config" />
-    <EmbeddedResource Include="settings.xml">
+    <EmbeddedResource Include="Settings.xml">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>

@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Linq;
+using System.Xml.Serialization;
 
 namespace Safe
 {
@@ -13,7 +15,7 @@ namespace Safe
 
     class SettingsWrap
     {
-        private static readonly string SETTINGS_PATH = "settings.xml";
+        private static readonly string SETTINGS_PATH = "SettingsWrap.Settings.xml";
         public static readonly string DEFAULT_PASS = "****";
 
         private static Boolean gps_status;
@@ -35,14 +37,20 @@ namespace Safe
         //XML conexion methods
         public static void loadSettingsfromXML()
         {
-            
-            settings_file = XDocument.Load(SETTINGS_PATH);
-            IEnumerable<XElement> settings_list = settings_file.Elements();
-            foreach ( var setting in settings_list)
+
+            var assembly = typeof(SettingsWrap).GetTypeInfo().Assembly;
+            System.IO.Stream stream = assembly.GetManifestResourceStream(SETTINGS_PATH);
+            List<String> setting_list;
+
+            using (var reader = new System.IO.StreamReader(stream))
             {
-                Debug.WriteLine(setting);
+                var serializer = new XmlSerializer(typeof(List<String>));
+                setting_list = (List<String>)serializer.Deserialize(reader);
             }
-            
+            foreach (var setting in setting_list)
+            {
+                System.Diagnostics.Debug.WriteLine(setting);
+            }
 
         }
 
@@ -137,4 +145,8 @@ namespace Safe
             return currentLanguage;
         }
     }
+}
+public class Setting
+{
+
 }

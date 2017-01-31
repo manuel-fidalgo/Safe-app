@@ -22,8 +22,10 @@ namespace Safe
 
         public SettingsPage()
         {
+            SettingsWrap.loadSettingsfromXML();
+
             //Create the two subpages
-            // map_page = new MapPage();    //BUG IN MAP PAGE!
+            map_page = new MapPage();    //BUG IN MAP PAGE!
             hardware_page = new HardwarePage();
 
             //Create all the items in the settings menu
