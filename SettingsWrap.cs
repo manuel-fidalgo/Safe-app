@@ -36,23 +36,26 @@ namespace Safe
             using (var reader = new System.IO.StreamReader(stream))
             {
 
-                crash_status = Boolean.Parse(reader.ReadLine());
-                falls_status = Boolean.Parse(reader.ReadLine());
-                vibration_status = Boolean.Parse(reader.ReadLine());
+                crash_status = Boolean.Parse(remove_comment(reader.ReadLine())); 
+                falls_status = Boolean.Parse(remove_comment(reader.ReadLine()));
+                vibration_status = Boolean.Parse(remove_comment(reader.ReadLine()));
 
-                security_code_status = Boolean.Parse(reader.ReadLine());
-                seccurity_code = reader.ReadLine();
+                security_code_status = Boolean.Parse(remove_comment(reader.ReadLine()));
+                seccurity_code = remove_comment(reader.ReadLine());
 
-
-                use_personal_message = Boolean.Parse(reader.ReadLine());
-                contact_Message = reader.ReadLine();
-                contact_number = reader.ReadLine();
+                use_personal_message = Boolean.Parse(remove_comment(reader.ReadLine()));
+                contact_Message = remove_comment(reader.ReadLine());
+                contact_number = remove_comment(reader.ReadLine());
                 
-                currentLanguage_code = reader.ReadLine();
-                use_accesibility = Boolean.Parse(reader.ReadLine());
-
+                currentLanguage_code = remove_comment(reader.ReadLine());
+                use_accesibility = Boolean.Parse(remove_comment(reader.ReadLine()));
+                
             }
         }
+        private static String remove_comment(String s)
+        {
+            return s.Substring(0, s.IndexOf('#')).Trim();
+        } 
         //COONTROLAR QUE NO QUEDEN COSAS VACIAS QUE PUEDAN ALTERAR LA LECTURA O ESCRITURA DEL FICHERO
         //ERROR STREAM WAS NO WRITTABLE
         public static void writeSettingsintoFile()
