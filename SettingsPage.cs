@@ -8,8 +8,8 @@ namespace Safe
 
         LanguagesList lg_lst;
         
-        SwitchCell gps_cell, accelerometer_cell, vibration_cell, password_cell;
-        EntryCell password_text, contact_message, contact_number, emergency_number;
+        SwitchCell detect_crash, detect_falls, vibration_cell, password_cell, use_access;
+        EntryCell password_text, contact_message, contact_number;
         TableSection hardware_section, password_setcion, personal_section, language_section, test_section;
         TextCell test_cell,map_cell,languagecell;
         public static string current_language;
@@ -22,7 +22,7 @@ namespace Safe
 
         public SettingsPage()
         {
-            SettingsWrap.loadSettingsfromXML();
+            SettingsWrap.loadSettingsfromFile();
 
             //Create the two subpages
             map_page = new MapPage();    //BUG IN MAP PAGE!
@@ -54,26 +54,29 @@ namespace Safe
 
             //Hardware config
 
-            gps_cell = new SwitchCell
+            detect_crash = new SwitchCell
             {
-                Text = AppResources.gps_status,
+                Text = AppResources.crash_status,
+                On = SettingsWrap.crash_status
             };
             
 
-            accelerometer_cell = new SwitchCell
+            detect_falls = new SwitchCell
             {
-                Text = AppResources.accelerometer_status
+                Text = AppResources.falls_status,
+                On = SettingsWrap.falls_status
             };
 
             vibration_cell = new SwitchCell
             {
-                Text = AppResources.vibration_status
+                Text = AppResources.vibration_status,
+                On = SettingsWrap.vibration_status
             };
 
             hardware_section = new TableSection(AppResources.hardware_config)
             {
-                gps_cell,
-                accelerometer_cell,
+                detect_crash,
+                detect_falls,
                 vibration_cell,
             };
 
@@ -82,14 +85,14 @@ namespace Safe
             password_cell = new SwitchCell
             {
                 Text = AppResources.use_pin,
-                On = false
+                On = SettingsWrap.security_code_status
             };
             password_cell.OnChanged += Password_cell_OnChanged;
 
             password_text = new EntryCell
             {
                 Label = AppResources.pin_code,
-                Placeholder = "****",
+                Placeholder = SettingsWrap.seccurity_code,
                 IsEnabled = false
             };
 
@@ -104,34 +107,28 @@ namespace Safe
             contact_message = new EntryCell
             {
                 Label = AppResources.contact_message,
+                Placeholder = SettingsWrap.contact_Message,
                 LabelColor = textColor
             };
 
             contact_number = new EntryCell
             {
                 Label = AppResources.contact_number,
+                Placeholder = SettingsWrap.contact_number,
                 LabelColor = textColor
-            };
-
-            emergency_number = new EntryCell
-            {
-                Label = AppResources.contact_number,
-                LabelColor = Color.FromRgb(255, 100, 100),
-                Placeholder = "112"
             };
 
             personal_section = new TableSection(AppResources.personal_info_config)
             {
                 contact_message,
                 contact_number,
-                emergency_number
             };
 
             //Language cell
 
             languagecell = new TextCell()
             {
-                Text = "Chooose language",
+                Text = "Language " + SettingsWrap.currentLanguage_code,
                 TextColor = textColor
             };
             languagecell.Tapped += Languagecell_Tapped;
@@ -139,6 +136,18 @@ namespace Safe
             language_section = new TableSection(AppResources.language)
             {
                 languagecell
+            };
+
+            //Acess cell
+
+            use_access = new SwitchCell()
+            {
+                Text = "Accesibility mode",
+                On = SettingsWrap.use_accesibility
+            };
+            var access_section = new TableSection("Accesiblility")
+            {
+                use_access
             };
 
             //Save cell
@@ -155,7 +164,7 @@ namespace Safe
                 save_cell
             };
 
-
+            
             var settings_table = new TableView
             {
                 Root = new TableRoot
@@ -165,7 +174,8 @@ namespace Safe
                     password_setcion,
                     personal_section,
                     language_section,
-                    save_section
+                    access_section,
+                    save_section,
                     
                  },
                 Intent = TableIntent.Settings
@@ -216,22 +226,7 @@ namespace Safe
 
         public void saveSettings()
         {
-            SettingsWrap.set_gps_status(gps_cell.On);
-            SettingsWrap.set_accelerometer_status(accelerometer_cell.On);
-            SettingsWrap.set_vibration_status(vibration_cell.On);
-
-            SettingsWrap.set_seccode_status(password_cell.On);
-
-            if (password_cell.On)
-                SettingsWrap.set_securityCode(password_text.Text);
-            else
-                SettingsWrap.set_securityCode(SettingsWrap.DEFAULT_PASS);
-
-            SettingsWrap.setContactMessage(contact_message.Text);
-            SettingsWrap.setContactNumber(contact_number.Text);
-            SettingsWrap.setEmergencyNumber(emergency_number.Text);
-
-            SettingsWrap.writeSettingsintoXML();
+            SettingsWrap.writeSettingsintoFile();
         }
     }
 }

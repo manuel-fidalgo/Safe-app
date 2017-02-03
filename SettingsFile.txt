@@ -1,0 +1,11 @@
+﻿True
+True
+True
+False
+False
+****
+False
+Accident in bla bla bla
++34767395745
+EN
+False

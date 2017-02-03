@@ -62,15 +62,6 @@ namespace Safe {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Accelerometer status.
-        /// </summary>
-        internal static string accelerometer_status {
-            get {
-                return ResourceManager.GetString("accelerometer_status", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Busca una cadena traducida similar a Contact message.
         /// </summary>
         internal static string contact_message {
@@ -85,6 +76,15 @@ namespace Safe {
         internal static string contact_number {
             get {
                 return ResourceManager.GetString("contact_number", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Detect car accidents.
+        /// </summary>
+        internal static string crash_status {
+            get {
+                return ResourceManager.GetString("crash_status", resourceCulture);
             }
         }
         
@@ -107,11 +107,11 @@ namespace Safe {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a GPS status.
+        ///   Busca una cadena traducida similar a Detect falls.
         /// </summary>
-        internal static string gps_status {
+        internal static string falls_status {
             get {
-                return ResourceManager.GetString("gps_status", resourceCulture);
+                return ResourceManager.GetString("falls_status", resourceCulture);
             }
         }
         

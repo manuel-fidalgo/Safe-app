@@ -38,7 +38,6 @@ namespace Safe
             buffer_counter = 0; buffer_speed_counter = 0;
         }
 
-        VectorValue last_added;
         //Add the last location to the buffer
         public async void getGpsLocation()
         {
@@ -57,11 +56,9 @@ namespace Safe
                 gps_data.Add(coor);
                 MapPage.last_coordinates = coor; //Will update the las coordinates in the map page 
                 buffer_counter++;
-                last_added = coor; //The location is correct
             }
             catch (Exception){
-                //Any error, we are goint to repeat the last correct value
-                gps_data.Add(last_added);
+                //Error getting the position
             }
         }
 
@@ -102,7 +99,7 @@ namespace Safe
                 t1 = p1.stamp.DateTime;
                 t2 = p2.stamp.DateTime;
 
-                var time_s = (int)((t2-t1).TotalMilliseconds) / 1000.0; 
+                var time_s = (int) (((t2-t1).TotalMilliseconds) / 1000.0); 
                 double speed_mps = dist / time_s;
                 lastSpeed = speed_mps;
 
@@ -114,7 +111,7 @@ namespace Safe
                 speed_ret = 3.6 * speed_mps;
                 gps_speed_buffer.Add(speed_ret);
                 buffer_speed_counter++;
-                return speed_ret;
+                return speed_ret==0 ? -1 : speed_ret;
 
             }
             else
