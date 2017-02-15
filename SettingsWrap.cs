@@ -62,7 +62,7 @@ namespace Safe
         {
             var assembly = typeof(SettingsWrap).GetTypeInfo().Assembly;
             Stream stream = assembly.GetManifestResourceStream(SETTINGS_PATH);
-            using (var writer = new System.IO.StreamWriter(stream))
+            using (var writer = new StreamWriter(stream))
             {
                 writer.WriteLine(crash_status.ToString());
                 writer.WriteLine(falls_status.ToString());

@@ -79,8 +79,11 @@ namespace Safe
 
         private void TapGestureRecognizer_settings_double_tap_Tapped(object sender, EventArgs e)
         {
-            VibrationManager.vibrate(500);
-            FinishAnimation();
+            if (animation_runing)
+            {
+                VibrationManager.vibrate(500);
+                FinishAnimation();
+            }
         }
 
         private void StartAnimation()
@@ -122,52 +125,62 @@ namespace Safe
             }
         }
 
-        private async void AlertMode()
+        private void AlertMode()
         {
 
+            var source = new CancellationTokenSource();
+            CancellationToken ct = source.Token;
+
             Task t = Task.Factory.StartNew(
-               () => Vibrate(),
-               CancellationToken.None,
+               () => Vibrate(ct),
+               ct,
                TaskCreationOptions.None,
                TaskScheduler.FromCurrentSynchronizationContext()
                );
 
             Task l = Task.Factory.StartNew(
-               () => ShowDialog(t),
+               () => ShowDialog(t, ct, source),
                CancellationToken.None,
                TaskCreationOptions.None,
                TaskScheduler.FromCurrentSynchronizationContext()
                );
 
         }
-
-        private async Task ShowDialog(Task t)
+        //Haveto-> Complete this code and search how to 
+        private async Task ShowDialog(Task t,CancellationToken ct,CancellationTokenSource cts)
         {
 
             var answer = await DisplayAlert("ALERT", "Are you okay?", "Yes", "No");
-
-            if (answer)
-            {
-                //
-            }
-            else
+            //Have an answer, lets cancell the other task
+            cts.Cancel();
+            
+            if(!answer) //The person needs help
             {
                 var answer2 = await DisplayAlert("INFO", "Do you want to send the message?", "Yes", "No");
                 if (answer2)
-                {
+                {   //Sends the message
                     MessageManager.sendAlertMessage();
                 }
             }
         }
-
-        private async Task Vibrate()
+        //Will vibrate during n seconds, if this task is not cancelled will send the message
+        private async Task Vibrate(CancellationToken ct)
         {
+            System.Diagnostics.Debug.WriteLine("Vibration task init.");
             for (int i = 0; i < 10; i++)
             {
                 await Task.Delay(100);
                 VibrationManager.vibrate(900);
             }
-            MessageManager.sendAlertMessage();
+            if (!ct.IsCancellationRequested)
+            {
+                System.Diagnostics.Debug.WriteLine("Vibration task has not been cancelled, send message");
+                MessageManager.sendAlertMessage();
+            }
+            else
+            {
+                System.Diagnostics.Debug.WriteLine("Vibration task has been cancelled");
+            }
         }
 
 
