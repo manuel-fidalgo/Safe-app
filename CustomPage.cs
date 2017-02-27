@@ -11,10 +11,14 @@ namespace Safe
         protected SKColor BALL, TEXT, GRADIENT0, GRADIENT1;
         protected SKShader GRAPH0, GRAPH1, GRAPH2, BLUEGRADIENT;
 
+
+        
         protected void initColors()
         {
+           
+            if (SettingsWrap.use_accesibility) TEXT = new SKColor(255,255,255);
+            else TEXT = new SKColor(165, 167, 159);
             BALL = new SKColor(0, 100, 255);
-            TEXT = new SKColor(165, 167, 159);
             GRADIENT0 = new SKColor(110, 110, 110);
             GRADIENT1 = new SKColor(37, 40, 42);
 

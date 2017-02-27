@@ -88,7 +88,7 @@ namespace Safe
             uheigth = surfaceHeight / H_DIV;
             radius = uwidth * 3;
             middle_width = surfaceWidth / 2;
-
+            //
 
             using (SKPaint paint = new SKPaint())
             {

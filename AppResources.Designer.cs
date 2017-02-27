@@ -125,7 +125,7 @@ namespace Safe {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Detect car accidents.
+        ///   Busca una cadena traducida similar a Manage car accidents.
         /// </summary>
         internal static string crash_status {
             get {
@@ -143,11 +143,20 @@ namespace Safe {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a default message.
+        ///   Busca una cadena traducida similar a Default message.
         /// </summary>
         internal static string default_message {
             get {
                 return ResourceManager.GetString("default_message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Safe App, Italy, 2017.
+        /// </summary>
+        internal static string develop_info {
+            get {
+                return ResourceManager.GetString("develop_info", resourceCulture);
             }
         }
         
@@ -161,7 +170,7 @@ namespace Safe {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Detect falls.
+        ///   Busca una cadena traducida similar a Manage fallings.
         /// </summary>
         internal static string falls_status {
             get {
@@ -188,7 +197,7 @@ namespace Safe {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a INFO.
+        ///   Busca una cadena traducida similar a info.
         /// </summary>
         internal static string info {
             get {
@@ -215,7 +224,7 @@ namespace Safe {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Pasword config.
+        ///   Busca una cadena traducida similar a Pasword configuration.
         /// </summary>
         internal static string password_config {
             get {
@@ -224,7 +233,7 @@ namespace Safe {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Personal Info config.
+        ///   Busca una cadena traducida similar a Personal Info configuration.
         /// </summary>
         internal static string personal_info_config {
             get {

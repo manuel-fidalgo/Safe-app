@@ -22,6 +22,8 @@ namespace Safe
         int angle;
         bool animation_runing;
 
+        public static MainPage singleton;
+
 
 
         public MainPage()
@@ -75,6 +77,8 @@ namespace Safe
             l.Children.Add(settingsview);
 
             Content = l;
+
+            singleton = this;
         }
 
         private void TapGestureRecognizer_settings_double_tap_Tapped(object sender, EventArgs e)
@@ -125,7 +129,7 @@ namespace Safe
             }
         }
 
-        private void AlertMode()
+        public void AlertMode()
         {
 
             var source = new CancellationTokenSource();
@@ -146,15 +150,15 @@ namespace Safe
                );
 
         }
-        //Haveto-> Complete this code and search how to 
-        private async Task ShowDialog(Task t,CancellationToken ct,CancellationTokenSource cts)
+        //shows a dialog and waits for a response. if the user closes the notification will cancell the other task
+        private async Task ShowDialog(Task t, CancellationToken ct, CancellationTokenSource cts)
         {
 
-            var answer = await DisplayAlert(AppResources.alert, AppResources.alert_question, AppResources.yes , AppResources.no);
+            var answer = await DisplayAlert(AppResources.alert, AppResources.alert_question, AppResources.yes, AppResources.no);
             //Have an answer, lets cancell the other task
             cts.Cancel();
-            
-            if(!answer) //The person needs help
+
+            if (!answer) //The person needs help
             {
                 var answer2 = await DisplayAlert(AppResources.info, AppResources.send_message, AppResources.yes, AppResources.no);
                 if (answer2)
@@ -169,7 +173,8 @@ namespace Safe
             System.Diagnostics.Debug.WriteLine("Vibration task init.");
             for (int i = 0; i < 10; i++)
             {
-                await Task.Delay(100);
+                if (ct.IsCancellationRequested) return;
+                await Task.Delay(1000);
                 VibrationManager.vibrate(900);
             }
             if (!ct.IsCancellationRequested)

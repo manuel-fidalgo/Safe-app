@@ -12,8 +12,12 @@ namespace Safe
     {
         public static void vibrate(int ms)
         {
-            var v = CrossVibrate.Current;
-            v.Vibration(ms); // 1 second vibration
+            //Will vibrate only if true in the settings
+            if (SettingsWrap.vibration_status)
+            {
+                var v = CrossVibrate.Current;
+                v.Vibration(ms); // 1 second vibration
+            }
         }
     }
     internal  class MessageManager

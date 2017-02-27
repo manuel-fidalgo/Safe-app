@@ -55,23 +55,14 @@ namespace Safe
                         c = true;
                         accelerometer_data.Remove(value);
                     }
-                    if (c) pushNotification();
+                    if (c) notification();
                 }
             }
         }
 
-        private async void pushNotification()
+        private void notification()
         {
-            var answer = await notification_page.DisplayAlert(AppResources.alert, AppResources.alert_question, AppResources.yes, AppResources.no);
-            if (!answer)
-            {
-                sendAlertMessage();   
-            }
-        }
-
-        private void sendAlertMessage()
-        {
-            MessageManager.sendAlertMessage();
+            MainPage.singleton.AlertMode();
         }
     }
     

@@ -154,12 +154,12 @@ namespace Safe
 
             var save_cell = new TextCell()
             {
-                Text = AppResources.save,
+                Text = AppResources.develop_info,
                 TextColor = textColor
             };
-            save_cell.Tapped += Save_button_Clicked;
+            //save_cell.Tapped += Save_button_Clicked;
 
-            var save_section = new TableSection(AppResources.save_settings)
+            var save_section = new TableSection(AppResources.info)
             {
                 save_cell
             };
@@ -180,12 +180,8 @@ namespace Safe
                  },
                 Intent = TableIntent.Settings
             };
-
-            Content = new ScrollView
-            {
-                Content = settings_table,
-                IsClippedToBounds = true
-            };
+            
+            Content = settings_table;
 
         }
 
