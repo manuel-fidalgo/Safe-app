@@ -25,6 +25,8 @@ namespace Safe
         double _eQuatorialEarthRadius = 6378.1370D;
         double _d2r = (Math.PI / 180D);
 
+        public static VectorValue lastcor;
+
         public Gps(List<VectorValue> buff, int buff_size,int delay)
         {
 
@@ -56,10 +58,12 @@ namespace Safe
                 gps_data.Add(coor);
                 MapPage.last_coordinates = coor; //Will update the las coordinates in the map page 
                 buffer_counter++;
+                lastcor = coor;
             }
             catch (Exception){
                 //Error getting the position
             }
+            
         }
 
         //Gets the distance betweem two coordinates (Meters)

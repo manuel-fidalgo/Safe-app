@@ -1,6 +1,7 @@
 ﻿using Android.OS;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using Xamarin.Forms;
@@ -15,12 +16,13 @@ namespace Safe
         public App()
         {
             // The root page of your application
+            
             MainPage = PageManager.Init();
         }
 
         protected override void OnStart()
         {
-            // Handle when your app starts
+            
         }
 
         protected override void OnSleep()
@@ -31,6 +33,12 @@ namespace Safe
         protected override void OnResume()
         {
             // Handle when your app resumes
+        }
+
+        private interface ILocalize
+        {
+            CultureInfo GetCurrentCultureInfo();
+            void SetLocale(CultureInfo ci);
         }
     }
 }

@@ -62,6 +62,51 @@ namespace Safe {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Accesibility.
+        /// </summary>
+        internal static string accesibility {
+            get {
+                return ResourceManager.GetString("accesibility", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Accesibility Mode.
+        /// </summary>
+        internal static string accesibility_mode {
+            get {
+                return ResourceManager.GetString("accesibility_mode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Alert.
+        /// </summary>
+        internal static string alert {
+            get {
+                return ResourceManager.GetString("alert", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Are you okay?.
+        /// </summary>
+        internal static string alert_question {
+            get {
+                return ResourceManager.GetString("alert_question", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a CLICK!.
+        /// </summary>
+        internal static string click_fast {
+            get {
+                return ResourceManager.GetString("click_fast", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Contact message.
         /// </summary>
         internal static string contact_message {
@@ -94,6 +139,15 @@ namespace Safe {
         internal static string danger_activity {
             get {
                 return ResourceManager.GetString("danger_activity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a default message.
+        /// </summary>
+        internal static string default_message {
+            get {
+                return ResourceManager.GetString("default_message", resourceCulture);
             }
         }
         
@@ -134,11 +188,29 @@ namespace Safe {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a INFO.
+        /// </summary>
+        internal static string info {
+            get {
+                return ResourceManager.GetString("info", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Language .
         /// </summary>
         internal static string language {
             get {
                 return ResourceManager.GetString("language", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a No.
+        /// </summary>
+        internal static string no {
+            get {
+                return ResourceManager.GetString("no", resourceCulture);
             }
         }
         
@@ -188,11 +260,74 @@ namespace Safe {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Do you want notify to your contact?.
+        /// </summary>
+        internal static string send_message {
+            get {
+                return ResourceManager.GetString("send_message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Settings.
         /// </summary>
         internal static string settings {
             get {
                 return ResourceManager.GetString("settings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Display Map.
+        /// </summary>
+        internal static string show_map {
+            get {
+                return ResourceManager.GetString("show_map", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a tap twice for stop.
+        /// </summary>
+        internal static string stop_message {
+            get {
+                return ResourceManager.GetString("stop_message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a tap twice to start.
+        /// </summary>
+        internal static string tap_start {
+            get {
+                return ResourceManager.GetString("tap_start", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a tap twice.
+        /// </summary>
+        internal static string tap_twice {
+            get {
+                return ResourceManager.GetString("tap_twice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Display test page.
+        /// </summary>
+        internal static string test_page {
+            get {
+                return ResourceManager.GetString("test_page", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Testing.
+        /// </summary>
+        internal static string testing {
+            get {
+                return ResourceManager.GetString("testing", resourceCulture);
             }
         }
         
@@ -220,6 +355,15 @@ namespace Safe {
         internal static string warning {
             get {
                 return ResourceManager.GetString("warning", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Yes.
+        /// </summary>
+        internal static string yes {
+            get {
+                return ResourceManager.GetString("yes", resourceCulture);
             }
         }
     }

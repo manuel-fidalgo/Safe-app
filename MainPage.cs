@@ -150,13 +150,13 @@ namespace Safe
         private async Task ShowDialog(Task t,CancellationToken ct,CancellationTokenSource cts)
         {
 
-            var answer = await DisplayAlert("ALERT", "Are you okay?", "Yes", "No");
+            var answer = await DisplayAlert(AppResources.alert, AppResources.alert_question, AppResources.yes , AppResources.no);
             //Have an answer, lets cancell the other task
             cts.Cancel();
             
             if(!answer) //The person needs help
             {
-                var answer2 = await DisplayAlert("INFO", "Do you want to send the message?", "Yes", "No");
+                var answer2 = await DisplayAlert(AppResources.info, AppResources.send_message, AppResources.yes, AppResources.no);
                 if (answer2)
                 {   //Sends the message
                     MessageManager.sendAlertMessage();
@@ -227,12 +227,12 @@ namespace Safe
                 if (!animation_runing)
                 {
                     paint.TextSize = (int)(1.5 * uheigth);
-                    canvas.DrawText("Settings", width / 2, (int)(uheigth * 2.5), paint);
+                    canvas.DrawText(AppResources.settings, width / 2, (int)(uheigth * 2.5), paint);
                 }
                 else
                 {
                     paint.TextSize = (uheigth);
-                    canvas.DrawText("Tap twice for stop", width / 2, (int)(uheigth * 2.5), paint);
+                    canvas.DrawText(AppResources.stop_message, width / 2, (int)(uheigth * 2.5), paint);
                 }
 
             }
@@ -276,9 +276,9 @@ namespace Safe
                 paint.TextAlign = SKTextAlign.Center;
                 paint.TextSize = uheigth;
                 if (animation_runing)
-                    canvas.DrawText("Tap twice", middle_width, 12 * uheigth, paint);
+                    canvas.DrawText(AppResources.tap_twice, middle_width, 12 * uheigth, paint);
                 else
-                    canvas.DrawText("Tap twice to start", middle_width, 12 * uheigth, paint);
+                    canvas.DrawText(AppResources.tap_start, middle_width, 12 * uheigth, paint);
 
                 //External dot
                 double angle_rad = (angle - 90) * 0.0174533;
@@ -290,7 +290,7 @@ namespace Safe
                     paint.TextSize = 2 * uheigth;
                     paint.TextAlign = SKTextAlign.Center;
                     paint.Shader = SKShader.CreateColor(BALL);
-                    canvas.DrawText("CLICK!", middle_width, (int)(uheigth * 5.5), paint);
+                    canvas.DrawText(AppResources.click_fast, middle_width, (int)(uheigth * 5.5), paint);
                 }
                 paint.Shader = SKShader.CreateColor(BALL);
                 canvas.DrawCircle((int)x, (int)y, 15, paint);

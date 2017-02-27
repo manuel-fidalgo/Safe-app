@@ -171,4 +171,52 @@
   <data name="warning" xml:space="preserve">
     <value>Warning</value>
   </data>
+  <data name="accesibility" xml:space="preserve">
+    <value>Accesibility</value>
+  </data>
+  <data name="accesibility_mode" xml:space="preserve">
+    <value>Accesibility Mode</value>
+  </data>
+  <data name="alert" xml:space="preserve">
+    <value>Alert</value>
+  </data>
+  <data name="alert_question" xml:space="preserve">
+    <value>Are you okay?</value>
+  </data>
+  <data name="click_fast" xml:space="preserve">
+    <value>CLICK!</value>
+  </data>
+  <data name="default_message" xml:space="preserve">
+    <value>default message</value>
+  </data>
+  <data name="info" xml:space="preserve">
+    <value>INFO</value>
+  </data>
+  <data name="no" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="send_message" xml:space="preserve">
+    <value>Do you want notify to your contact?</value>
+  </data>
+  <data name="show_map" xml:space="preserve">
+    <value>Display Map</value>
+  </data>
+  <data name="stop_message" xml:space="preserve">
+    <value>tap twice for stop</value>
+  </data>
+  <data name="tap_start" xml:space="preserve">
+    <value>tap twice to start</value>
+  </data>
+  <data name="tap_twice" xml:space="preserve">
+    <value>tap twice</value>
+  </data>
+  <data name="testing" xml:space="preserve">
+    <value>Testing</value>
+  </data>
+  <data name="test_page" xml:space="preserve">
+    <value>Display test page</value>
+  </data>
+  <data name="yes" xml:space="preserve">
+    <value>Yes</value>
+  </data>
 </root>

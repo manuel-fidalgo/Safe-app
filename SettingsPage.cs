@@ -31,19 +31,19 @@ namespace Safe
             //Create all the items in the settings menu
             test_cell = new TextCell()
             {
-                Text = "Display Test Page",
+                Text = AppResources.test_page,
                 TextColor = textColor
             };
             test_cell.Tapped += Test_cell_Tapped;
 
             map_cell = new TextCell()
             {
-                Text = "Show Map",
+                Text = AppResources.show_map,
                 TextColor = textColor
             };
             map_cell.Tapped += Map_cell_Tapped;
             
-            test_section = new TableSection("Testing")
+            test_section = new TableSection(AppResources.testing)
             {
                 test_cell,
                 map_cell
@@ -128,7 +128,7 @@ namespace Safe
 
             languagecell = new TextCell()
             {
-                Text = "Language " + SettingsWrap.currentLanguage_code,
+                Text = AppResources.language + "  " + SettingsWrap.currentLanguage_code,
                 TextColor = textColor
             };
             languagecell.Tapped += Languagecell_Tapped;
@@ -142,10 +142,10 @@ namespace Safe
 
             use_access = new SwitchCell()
             {
-                Text = "Accesibility mode",
+                Text = AppResources.accesibility_mode,
                 On = SettingsWrap.use_accesibility
             };
-            var access_section = new TableSection("Accesiblility")
+            var access_section = new TableSection(AppResources.accesibility)
             {
                 use_access
             };
@@ -154,7 +154,7 @@ namespace Safe
 
             var save_cell = new TextCell()
             {
-                Text = "Save Settings",
+                Text = AppResources.save,
                 TextColor = textColor
             };
             save_cell.Tapped += Save_button_Clicked;
@@ -173,7 +173,7 @@ namespace Safe
                     hardware_section,
                     password_setcion,
                     personal_section,
-                    language_section,
+             //     language_section, //No needed, automatic location
                     access_section,
                     save_section,
                     

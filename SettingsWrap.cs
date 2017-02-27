@@ -60,23 +60,30 @@ namespace Safe
         //ERROR STREAM WAS NO WRITTABLE
         public static void writeSettingsintoFile()
         {
-            var assembly = typeof(SettingsWrap).GetTypeInfo().Assembly;
-            Stream stream = assembly.GetManifestResourceStream(SETTINGS_PATH);
-            using (var writer = new StreamWriter(stream))
+            try
             {
-                writer.WriteLine(crash_status.ToString());
-                writer.WriteLine(falls_status.ToString());
-                writer.WriteLine(vibration_status.ToString());
+                var assembly = typeof(SettingsWrap).GetTypeInfo().Assembly;
+                Stream stream = assembly.GetManifestResourceStream(SETTINGS_PATH);
+                using (var writer = new StreamWriter(stream))
+                {
+                    writer.WriteLine(crash_status.ToString());
+                    writer.WriteLine(falls_status.ToString());
+                    writer.WriteLine(vibration_status.ToString());
 
-                writer.WriteLine(security_code_status.ToString());
-                if (!security_code_status)
-                    seccurity_code = DEFAULT_PASS;
+                    writer.WriteLine(security_code_status.ToString());
+                    if (!security_code_status)
+                        seccurity_code = DEFAULT_PASS;
 
-                writer.WriteLine(seccurity_code);
-                writer.WriteLine(contact_Message);
+                    writer.WriteLine(seccurity_code);
+                    writer.WriteLine(contact_Message);
 
-                writer.WriteLine(currentLanguage_code);
+                    writer.WriteLine(currentLanguage_code);
 
+                }
+            }
+            catch (Exception)
+            {
+                //Some bad ocurred
             }
         }
     }

@@ -1,6 +1,5 @@
 C:\Users\Manuel\Documents\Visual Studio 2015\Projects\Safe\Safe\Safe\bin\Debug\Safe.dll
 C:\Users\Manuel\Documents\Visual Studio 2015\Projects\Safe\Safe\Safe\bin\Debug\Safe.pdb
-C:\Users\Manuel\Documents\Visual Studio 2015\Projects\Safe\Safe\Safe\bin\Debug\it\Safe.resources.dll
 C:\Users\Manuel\Documents\Visual Studio 2015\Projects\Safe\Safe\Safe\bin\Debug\en\Safe.resources.dll
 C:\Users\Manuel\Documents\Visual Studio 2015\Projects\Safe\Safe\Safe\bin\Debug\DeviceMotion.Plugin.Abstractions.dll
 C:\Users\Manuel\Documents\Visual Studio 2015\Projects\Safe\Safe\Safe\bin\Debug\DeviceMotion.Plugin.dll
@@ -41,10 +40,8 @@ C:\Users\Manuel\Documents\Visual Studio 2015\Projects\Safe\Safe\Safe\bin\Debug\X
 C:\Users\Manuel\Documents\Visual Studio 2015\Projects\Safe\Safe\Safe\bin\Debug\Xamarin.iOS.xml
 C:\Users\Manuel\Documents\Visual Studio 2015\Projects\Safe\Safe\Safe\obj\Debug\Safe.csprojResolveAssemblyReference.cache
 C:\Users\Manuel\Documents\Visual Studio 2015\Projects\Safe\Safe\Safe\obj\Debug\Safe.AppResources.resources
-C:\Users\Manuel\Documents\Visual Studio 2015\Projects\Safe\Safe\Safe\obj\Debug\Safe.AppResources.it.resources
 C:\Users\Manuel\Documents\Visual Studio 2015\Projects\Safe\Safe\Safe\obj\Debug\Safe.AppResources.en.resources
 C:\Users\Manuel\Documents\Visual Studio 2015\Projects\Safe\Safe\Safe\obj\Debug\Safe.csproj.GenerateResource.Cache
-C:\Users\Manuel\Documents\Visual Studio 2015\Projects\Safe\Safe\Safe\obj\Debug\it\Safe.resources.dll
 C:\Users\Manuel\Documents\Visual Studio 2015\Projects\Safe\Safe\Safe\obj\Debug\en\Safe.resources.dll
 C:\Users\Manuel\Documents\Visual Studio 2015\Projects\Safe\Safe\Safe\obj\Debug\Safe.dll
 C:\Users\Manuel\Documents\Visual Studio 2015\Projects\Safe\Safe\Safe\obj\Debug\Safe.pdb

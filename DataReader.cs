@@ -62,7 +62,7 @@ namespace Safe
 
         private async void pushNotification()
         {
-            var answer = await notification_page.DisplayAlert("ALERT", "Are you okay?", "Yes", "No");
+            var answer = await notification_page.DisplayAlert(AppResources.alert, AppResources.alert_question, AppResources.yes, AppResources.no);
             if (!answer)
             {
                 sendAlertMessage();   
@@ -71,7 +71,7 @@ namespace Safe
 
         private void sendAlertMessage()
         {
-
+            MessageManager.sendAlertMessage();
         }
     }
     

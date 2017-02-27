@@ -4,7 +4,7 @@ True # use vibration
 False # use pin code
 **** # pin code
 False # use a personal message
-Accident in bla bla bla # message
-+34767395745 # Number
-EN # Language code
+Default Message # message
++34657206567 # Number
+ES # Language code
 False # Use accesibility
